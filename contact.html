@@ -40,6 +40,10 @@
     .contact-form textarea{height:130px}
     .btn-submit{padding:0.9rem 2rem;align-self:flex-start;background:var(--accent);border:none;color:var(--white);font-family:var(--font-en);font-size:0.78rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:background 0.2s}
     .btn-submit:hover{background:var(--accent2)}
+    .btn-submit:disabled{opacity:0.5;cursor:not-allowed}
+    .form-status{font-size:0.82rem;margin-top:0.3rem;min-height:1.2em;transition:color 0.2s}
+    .form-status.success{color:var(--accent2)}
+    .form-status.error{color:#e06a6a}
     footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
     .footer-copy{font-family:var(--font-en);font-size:0.72rem;color:var(--muted);letter-spacing:0.06em}
     @media(max-width:900px){nav{padding:0 1.5rem}.contact-page{padding:calc(var(--nav-h)+3rem) 1.5rem 4rem}.contact-grid{grid-template-columns:1fr;gap:3rem}}
@@ -91,12 +95,13 @@
         </a>
       </div>
     </div>
-    <form class="contact-form" onsubmit="return false;">
-      <input type="text" placeholder="이름"/>
-      <input type="email" placeholder="이메일"/>
-      <input type="text" placeholder="제목"/>
-      <textarea placeholder="메시지를 입력해주세요"></textarea>
-      <button class="btn-submit" type="submit">Send Message</button>
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xlgypeny" method="POST">
+      <input type="text" name="name" placeholder="이름" required/>
+      <input type="email" name="email" placeholder="이메일" required/>
+      <input type="text" name="subject" placeholder="제목"/>
+      <textarea name="message" placeholder="메시지를 입력해주세요" required></textarea>
+      <button class="btn-submit" type="submit" id="submitBtn">Send Message</button>
+      <p class="form-status" id="formStatus"></p>
     </form>
   </div>
 </div>
@@ -104,5 +109,42 @@
 <footer>
   <p class="footer-copy">© 2026 Baek Seokhyun. All rights reserved.</p>
 </footer>
+
+<script>
+  const form   = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  const btn    = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    status.textContent = '';
+    status.className = 'form-status';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        status.textContent = '메시지가 전송되었습니다. 감사합니다!';
+        status.classList.add('success');
+        form.reset();
+      } else {
+        status.textContent = '전송에 실패했습니다. 잠시 후 다시 시도해주세요.';
+        status.classList.add('error');
+      }
+    } catch (err) {
+      status.textContent = '네트워크 오류가 발생했습니다. 다시 시도해주세요.';
+      status.classList.add('error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+    }
+  });
+</script>
 </body>
 </html>
