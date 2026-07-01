@@ -39,6 +39,23 @@ const PROJECTS = [
     ]
   },
 
+  {
+    id:        "ourtea-specwork",
+    section:   "ai",             // AI Content 탭
+    category:  "photography",    // AI > Photography
+    brand:     "OUR TEA",
+    title:     "Spec Work",
+    date:      "2026",
+    showOnHome: true,
+    images: [
+      // 첫 번째 = 대표 썸네일 (05번)
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782891143/260529_%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%AF%E1%84%90%E1%85%B5_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF_05-10mb_uoqbgz.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782891146/260324_%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%AF%E1%84%90%E1%85%B5_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF_02-10mb_vbr1ua.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782891146/260324_%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%AF%E1%84%90%E1%85%B5_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF_01-10mb_eogw64.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782891144/260529_%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%AF%E1%84%90%E1%85%B5_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF_03-10mb_bhtlxa.jpg",
+    ]
+  },
+
   // ────────────────────────────────────────────────────────────────
   // 📋 새 프로젝트 추가 시 아래 템플릿을 복사해서 사용하세요:
   // ────────────────────────────────────────────────────────────────
