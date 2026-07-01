@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Contact — BAEK SEOKHYUN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0d1117;--bg2:#131923;--surface:#1a2233;--border:#1e2d42;--text:#e0e6f0;--muted:#5a7a99;--accent:#4a90d9;--accent2:#6ab0f5;--white:#ffffff;--nav-h:60px;--font-en:'Inter',sans-serif;--font-kr:'Noto Sans KR',sans-serif}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-kr);font-weight:300;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:var(--nav-h);background:rgba(13,17,23,0.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:var(--font-en);font-size:0.95rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);text-decoration:none}
+    .nav-links{display:flex;list-style:none}
+    .nav-links>li{position:relative}
+    .nav-links>li>a{display:flex;align-items:center;gap:0.3rem;padding:0 1.3rem;height:var(--nav-h);line-height:var(--nav-h);font-family:var(--font-en);font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;white-space:nowrap}
+    .nav-links>li>a:hover,.nav-links>li>a.active{color:var(--white)}
+    .nav-links>li>a.active::after{content:'';position:absolute;bottom:0;left:1.3rem;right:1.3rem;height:2px;background:var(--accent)}
+    .chevron{display:inline-block;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid var(--muted);transition:transform 0.2s;margin-top:1px}
+    .nav-links>li:hover .chevron{transform:rotate(180deg)}
+    .dropdown{display:none;position:absolute;top:calc(var(--nav-h) - 1px);left:0;min-width:160px;background:rgba(19,25,35,0.97);border:1px solid var(--border);border-top:2px solid var(--accent);backdrop-filter:blur(16px);list-style:none}
+    .nav-links>li:hover .dropdown{display:block}
+    .dropdown li a{display:block;padding:0.7rem 1.4rem;font-family:var(--font-en);font-size:0.75rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.15s,background 0.15s}
+    .dropdown li a:hover{color:var(--white);background:rgba(74,144,217,0.08)}
+
+    .contact-page{flex:1;display:flex;align-items:center;justify-content:center;padding:calc(var(--nav-h) + 4rem) 3rem 6rem;max-width:1000px;margin:0 auto;width:100%}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:6rem;width:100%;align-items:start}
+    .page-eyebrow{font-family:var(--font-en);font-size:0.7rem;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
+    .page-title{font-family:var(--font-en);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--white);letter-spacing:-0.02em;margin-bottom:1.5rem}
+    .contact-desc{font-size:0.95rem;color:var(--muted);line-height:1.9;margin-bottom:2.5rem}
+    .contact-links{display:flex;flex-direction:column;gap:1rem}
+    .contact-link{display:flex;align-items:center;gap:1rem;font-family:var(--font-en);font-size:0.85rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
+    .contact-link:hover{color:var(--accent2)}
+    .contact-icon{width:36px;height:36px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0;font-size:0.85rem;font-family:var(--font-en);transition:border-color 0.2s}
+    .contact-link:hover .contact-icon{border-color:var(--accent)}
+    .contact-form{display:flex;flex-direction:column;gap:0.9rem}
+    .contact-form input,.contact-form textarea{width:100%;padding:0.85rem 1rem;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:var(--font-kr);font-size:0.9rem;outline:none;resize:none;transition:border-color 0.2s}
+    .contact-form input:focus,.contact-form textarea:focus{border-color:var(--accent)}
+    .contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--border)}
+    .contact-form textarea{height:130px}
+    .btn-submit{padding:0.9rem 2rem;align-self:flex-start;background:var(--accent);border:none;color:var(--white);font-family:var(--font-en);font-size:0.78rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:background 0.2s}
+    .btn-submit:hover{background:var(--accent2)}
+    footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .footer-copy{font-family:var(--font-en);font-size:0.72rem;color:var(--muted);letter-spacing:0.06em}
+    @media(max-width:900px){nav{padding:0 1.5rem}.contact-page{padding:calc(var(--nav-h)+3rem) 1.5rem 4rem}.contact-grid{grid-template-columns:1fr;gap:3rem}}
+    @media(max-width:600px){.nav-links{display:none}footer{flex-direction:column;gap:1rem;text-align:center}}
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Baek Seokhyun</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <a href="photography.html">Photography <span class="chevron"></span></a>
+      <ul class="dropdown">
+        <li><a href="photography.html#food">Food</a></li>
+        <li><a href="photography.html#product">Product</a></li>
+      </ul>
+    </li>
+    <li><a href="video.html">Video</a></li>
+    <li><a href="ai.html">AI Content</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="contact-page">
+  <div class="contact-grid">
+    <div>
+      <p class="page-eyebrow">Contact</p>
+      <h1 class="page-title">함께<br>작업해요.</h1>
+      <p class="contact-desc">새로운 프로젝트, 협업 제안,<br>또는 단순한 안부라도<br>편하게 연락주세요.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:your@email.com">
+          <div class="contact-icon">@</div>
+          your@email.com
+        </a>
+        <a class="contact-link" href="https://instagram.com" target="_blank">
+          <div class="contact-icon">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          </div>
+          @instagram_handle
+        </a>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="return false;">
+      <input type="text" placeholder="이름"/>
+      <input type="email" placeholder="이메일"/>
+      <input type="text" placeholder="제목"/>
+      <textarea placeholder="메시지를 입력해주세요"></textarea>
+      <button class="btn-submit" type="submit">Send Message</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-copy">© 2026 Baek Seokhyun. All rights reserved.</p>
+</footer>
+</body>
+</html>
