@@ -43,8 +43,6 @@
     .project-info{
       max-width:1200px;margin:0 auto;
       padding:2.5rem 3rem 3.5rem;
-      display:grid;grid-template-columns:1fr 2fr;
-      gap:4rem;align-items:start;
       border-bottom:1px solid var(--border);
     }
     .project-meta{}
@@ -72,12 +70,6 @@
       font-family:var(--font-en);font-size:0.75rem;
       color:var(--muted);letter-spacing:0.1em;
     }
-    .project-desc{
-      font-size:0.97rem;color:var(--muted);
-      line-height:1.9;padding-top:0.5rem;
-    }
-    .project-desc p{margin-bottom:1rem}
-    .project-desc p:last-child{margin-bottom:0}
 
     /* IMAGE GRID */
     .grid-wrap{max-width:1200px;margin:0 auto;padding:3rem 3rem 6rem}
@@ -178,9 +170,6 @@
     <h1 class="project-title" id="projectTitle">프로젝트명</h1>
     <p class="project-date" id="projectDate">2025</p>
   </div>
-  <div class="project-desc" id="projectDesc">
-    <p>프로젝트 설명을 입력해주세요.</p>
-  </div>
 </div>
 
 <!-- IMAGE GRID -->
@@ -252,7 +241,6 @@ if (project) {
   document.getElementById('projectBrand').textContent = project.brand;
   document.getElementById('projectTitle').textContent = project.title;
   document.getElementById('projectDate').textContent  = project.date;
-  document.getElementById('projectDesc').innerHTML    = project.desc.map(p=>`<p>${p}</p>`).join('');
 
   // 뒤로가기 버튼 필터 연동
   const backBtn = document.querySelector('.back-btn');
@@ -276,7 +264,6 @@ if (project) {
 } else {
   // 프로젝트를 찾을 수 없을 때
   document.getElementById('projectTitle').textContent = '프로젝트를 찾을 수 없습니다.';
-  document.getElementById('projectDesc').innerHTML = '<p>올바른 링크인지 확인해주세요.</p>';
 }
 
 // ── Lightbox ──

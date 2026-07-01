@@ -29,14 +29,11 @@
     .back-btn svg{transition:transform 0.2s}
     .back-btn:hover svg{transform:translateX(-3px)}
 
-    .project-info{max-width:1200px;margin:0 auto;padding:2.5rem 3rem 3.5rem;display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start;border-bottom:1px solid var(--border)}
+    .project-info{max-width:1200px;margin:0 auto;padding:2.5rem 3rem 3.5rem;border-bottom:1px solid var(--border)}
     .project-tag{display:inline-block;margin-bottom:1.2rem;padding:0.25rem 0.7rem;font-family:var(--font-en);font-size:0.65rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;background:rgba(74,144,217,0.15);border:1px solid rgba(74,144,217,0.35);color:var(--accent2)}
     .project-brand{font-family:var(--font-en);font-size:0.72rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
     .project-title{font-family:var(--font-en);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;color:var(--white);letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem}
     .project-date{font-family:var(--font-en);font-size:0.75rem;color:var(--muted);letter-spacing:0.1em}
-    .project-desc{font-size:0.97rem;color:var(--muted);line-height:1.9;padding-top:0.5rem}
-    .project-desc p{margin-bottom:1rem}
-    .project-desc p:last-child{margin-bottom:0}
 
     .grid-wrap{max-width:1200px;margin:0 auto;padding:3rem 3rem 6rem}
     .image-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
@@ -110,7 +107,6 @@
     <h1 class="project-title" id="projectTitle">프로젝트명</h1>
     <p class="project-date" id="projectDate">2025</p>
   </div>
-  <div class="project-desc" id="projectDesc"></div>
 </div>
 
 <div class="grid-wrap">
@@ -142,7 +138,6 @@ const AI_PROJECTS = {
     title:    "Work Spec",
     date:     "2026",
     category: "photography",
-    desc:     ["AI를 활용한 Le Labo 향수 비주얼 작업입니다.", "제품의 무드와 감각을 AI 이미지로 재해석했습니다."],
     images: [
       "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782874332/%E1%84%85%E1%85%B3%E1%84%85%E1%85%A1%E1%84%87%E1%85%A9_%E1%84%83%E1%85%A1%E1%86%AB%E1%84%8E%E1%85%A6_01_opqajw.jpg",
       "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782874332/%E1%84%85%E1%85%B3%E1%84%85%E1%85%A1%E1%84%87%E1%85%A9_%E1%84%8B%E1%85%A5%E1%84%82%E1%85%A1%E1%84%83%E1%85%A513_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF02_wmgz09.jpg",
@@ -187,7 +182,6 @@ if (project) {
   document.getElementById('projectBrand').textContent = project.brand;
   document.getElementById('projectTitle').textContent = project.title;
   document.getElementById('projectDate').textContent  = project.date;
-  document.getElementById('projectDesc').innerHTML    = project.desc.map(p=>`<p>${p}</p>`).join('');
   document.getElementById('backBtn').href = `ai.html?filter=${project.category}`;
 
   const grid = document.getElementById('imageGrid');
@@ -220,7 +214,6 @@ if (project) {
   }
 } else {
   document.getElementById('projectTitle').textContent = '프로젝트를 찾을 수 없습니다.';
-  document.getElementById('projectDesc').innerHTML = '<p>올바른 링크인지 확인해주세요.</p>';
 }
 
 const images = project?.images || [];
