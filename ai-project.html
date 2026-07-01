@@ -261,7 +261,6 @@ gallery.addEventListener('mousedown', e=>{ if(gallery.style.display==='grid')ret
 gallery.addEventListener('mouseleave', ()=>{ isDown=false; gallery.classList.remove('dragging'); });
 gallery.addEventListener('mouseup', ()=>{ isDown=false; gallery.classList.remove('dragging'); });
 gallery.addEventListener('mousemove', e=>{ if(!isDown)return; e.preventDefault(); const x=e.pageX-gallery.offsetLeft; const walk=(x-startX); if(Math.abs(walk)>5)moved=true; gallery.scrollLeft=scrollLeft-walk; });
-gallery.addEventListener('wheel', e=>{ if(gallery.style.display==='grid')return; if(e.deltaY!==0){e.preventDefault(); gallery.scrollLeft+=e.deltaY;} }, {passive:false});
 window.wasDragged = ()=>moved;
 </script>
 
