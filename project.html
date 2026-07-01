@@ -314,14 +314,48 @@ function updateLightbox() {
   document.getElementById('lightboxImg').src = images[currentIdx];
   document.getElementById('lightboxCounter').textContent = `${currentIdx + 1} / ${images.length}`;
 }
+// 슬라이드 전환 모션 (dir: 1=다음, -1=이전)
+let lbAnimating = false;
+function navigate(dir) {
+  if (lbAnimating || images.length < 2) {
+    currentIdx = (currentIdx + dir + images.length) % images.length;
+    updateLightbox();
+    return;
+  }
+  lbAnimating = true;
+  const img = document.getElementById('lightboxImg');
+  const outX = dir > 0 ? '-30%' : '30%';   // 현재 이미지가 빠져나갈 방향
+  const inX  = dir > 0 ? '30%'  : '-30%';   // 새 이미지가 들어올 방향
+  // 현재 이미지 밀어내며 페이드아웃
+  img.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
+  img.style.transform  = `translateX(${outX})`;
+  img.style.opacity    = '0';
+  setTimeout(() => {
+    // 이미지 교체 후 반대편에서 들어오도록 세팅
+    currentIdx = (currentIdx + dir + images.length) % images.length;
+    updateLightbox();
+    img.style.transition = 'none';
+    img.style.transform  = `translateX(${inX})`;
+    img.style.opacity    = '0';
+    // 다음 프레임에 제자리로 슬라이드인
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        img.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+        img.style.transform  = 'translateX(0)';
+        img.style.opacity    = '1';
+        setTimeout(() => { lbAnimating = false; }, 250);
+      });
+    });
+  }, 200);
+}
 document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-document.getElementById('lightboxPrev').addEventListener('click', () => { currentIdx = (currentIdx - 1 + images.length) % images.length; updateLightbox(); });
-document.getElementById('lightboxNext').addEventListener('click', () => { currentIdx = (currentIdx + 1) % images.length; updateLightbox(); });
+document.getElementById('lightboxPrev').addEventListener('click', () => navigate(-1));
+document.getElementById('lightboxNext').addEventListener('click', () => navigate(1));
 document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) closeLightbox(); });
 document.addEventListener('keydown', e => {
   if (!document.getElementById('lightbox').classList.contains('open')) return;
-  if (e.key === 'ArrowLeft')  { currentIdx = (currentIdx - 1 + images.length) % images.length; updateLightbox(); }
-  if (e.key === 'ArrowRight') { currentIdx = (currentIdx + 1) % images.length; updateLightbox(); }
+  if (e.key === 'ArrowLeft')  navigate(-1);
+  if (e.key === 'ArrowRight') navigate(1);
   if (e.key === 'Escape')     closeLightbox();
 });
 
@@ -374,12 +408,10 @@ document.addEventListener('keydown', e => {
         img.style.transform = ''; img.style.opacity = ''; lb.style.background = '';
       }, 280);
     } else if (axis === 'x' && Math.abs(dx) > H_THRESHOLD) {
-      // 좌우 스와이프 → 이미지 전환
+      // 좌우 스와이프 → 슬라이드 전환
       img.style.transform = '';
       lb.style.background = '';
-      if (dx < 0) currentIdx = (currentIdx + 1) % images.length;
-      else        currentIdx = (currentIdx - 1 + images.length) % images.length;
-      updateLightbox();
+      navigate(dx < 0 ? 1 : -1);
     } else {
       // 기준 미달 → 원위치
       img.style.transform = '';

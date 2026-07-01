@@ -227,14 +227,33 @@ let currentIdx = 0;
 function openLightbox(idx){ if(window.wasDragged && window.wasDragged())return; currentIdx=idx; updateLightbox(); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
 function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
 function updateLightbox(){ document.getElementById('lightboxImg').src=images[currentIdx]; document.getElementById('lightboxCounter').textContent=`${currentIdx+1} / ${images.length}`; }
+let lbAnimating=false;
+function navigate(dir){
+  if(lbAnimating || images.length<2){ currentIdx=(currentIdx+dir+images.length)%images.length; updateLightbox(); return; }
+  lbAnimating=true;
+  const img=document.getElementById('lightboxImg');
+  const outX=dir>0?'-30%':'30%', inX=dir>0?'30%':'-30%';
+  img.style.transition='transform 0.2s ease, opacity 0.2s ease';
+  img.style.transform=`translateX(${outX})`; img.style.opacity='0';
+  setTimeout(()=>{
+    currentIdx=(currentIdx+dir+images.length)%images.length;
+    updateLightbox();
+    img.style.transition='none'; img.style.transform=`translateX(${inX})`; img.style.opacity='0';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      img.style.transition='transform 0.25s ease, opacity 0.25s ease';
+      img.style.transform='translateX(0)'; img.style.opacity='1';
+      setTimeout(()=>{ lbAnimating=false; },250);
+    }));
+  },200);
+}
 document.getElementById('lightboxClose').addEventListener('click',closeLightbox);
-document.getElementById('lightboxPrev').addEventListener('click',()=>{ currentIdx=(currentIdx-1+images.length)%images.length; updateLightbox(); });
-document.getElementById('lightboxNext').addEventListener('click',()=>{ currentIdx=(currentIdx+1)%images.length; updateLightbox(); });
+document.getElementById('lightboxPrev').addEventListener('click',()=>navigate(-1));
+document.getElementById('lightboxNext').addEventListener('click',()=>navigate(1));
 document.getElementById('lightbox').addEventListener('click',e=>{ if(e.target===document.getElementById('lightbox'))closeLightbox(); });
 document.addEventListener('keydown',e=>{
   if(!document.getElementById('lightbox').classList.contains('open'))return;
-  if(e.key==='ArrowLeft'){currentIdx=(currentIdx-1+images.length)%images.length;updateLightbox();}
-  if(e.key==='ArrowRight'){currentIdx=(currentIdx+1)%images.length;updateLightbox();}
+  if(e.key==='ArrowLeft')navigate(-1);
+  if(e.key==='ArrowRight')navigate(1);
   if(e.key==='Escape')closeLightbox();
 });
 
@@ -278,9 +297,7 @@ document.addEventListener('keydown',e=>{
       setTimeout(()=>{ closeLightbox(); img.style.transform=''; img.style.opacity=''; lb.style.background=''; }, 280);
     } else if(axis==='x' && Math.abs(dx)>H_THRESHOLD){
       img.style.transform=''; lb.style.background='';
-      if(dx<0) currentIdx=(currentIdx+1)%images.length;
-      else     currentIdx=(currentIdx-1+images.length)%images.length;
-      updateLightbox();
+      navigate(dx<0?1:-1);
     } else {
       img.style.transform=''; lb.style.background='';
     }
