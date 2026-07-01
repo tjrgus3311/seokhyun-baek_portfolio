@@ -56,6 +56,22 @@ const PROJECTS = [
     ]
   },
 
+  {
+    id:        "crimion-specwork",
+    section:   "ai",             // AI Content 탭
+    category:  "photography",    // AI > Photography
+    brand:     "CRIMION",
+    title:     "Spec Work",
+    date:      "2026",
+    showOnHome: true,
+    images: [
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782891369/%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8B%E1%85%A9%E1%86%AB_%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%8C%E1%85%A5%E1%86%AF%E1%84%86%E1%85%B5%E1%84%89%E1%85%B3%E1%84%91%E1%85%B3%E1%84%85%E1%85%A6%E1%84%83%E1%85%B3_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF_01-10mb_nvxjen.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782891365/%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8B%E1%85%A9%E1%86%AB_%E1%84%87%E1%85%A1%E1%86%B7_%E1%84%89%E1%85%B3%E1%84%91%E1%85%B3%E1%84%85%E1%85%A6%E1%84%83%E1%85%B3_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF_01-10mb_aarzv0.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782891367/%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8B%E1%85%A9%E1%86%AB_%E1%84%92%E1%85%B3%E1%86%A8%E1%84%8B%E1%85%B5%E1%86%B7%E1%84%8C%E1%85%A1%E1%84%89%E1%85%B3%E1%84%91%E1%85%B3%E1%84%85%E1%85%A6%E1%84%83%E1%85%B3_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF_01-10mb_p2mf6t.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782891365/%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8B%E1%85%A9%E1%86%AB_%E1%84%89%E1%85%B3%E1%84%91%E1%85%B3%E1%84%85%E1%85%A6%E1%84%83%E1%85%B3_%E1%84%83%E1%85%A1%E1%86%AB%E1%84%8E%E1%85%A6_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF_01-10mb_z99xj9.jpg",
+    ]
+  },
+
   // ────────────────────────────────────────────────────────────────
   // 📋 새 프로젝트 추가 시 아래 템플릿을 복사해서 사용하세요:
   // ────────────────────────────────────────────────────────────────
