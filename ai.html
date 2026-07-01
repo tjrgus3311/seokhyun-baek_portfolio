@@ -7,9 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#0d1117;--bg2:#131923;--surface:#1a2233;--border:#1e2d42;--text:#e0e6f0;--muted:#5a7a99;--accent:#4a90d9;--accent2:#6ab0f5;--white:#ffffff;--nav-h:60px;--font-en:'Inter',sans-serif;--font-kr:'Noto Sans KR',sans-serif}
+    :root{--bg:#0d1117;--surface:#1a2233;--border:#1e2d42;--text:#e0e6f0;--muted:#5a7a99;--accent:#4a90d9;--accent2:#6ab0f5;--white:#ffffff;--nav-h:60px;--font-en:'Inter',sans-serif;--font-kr:'Noto Sans KR',sans-serif}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:var(--font-kr);font-weight:300;-webkit-font-smoothing:antialiased}
+
+    /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:var(--nav-h);background:rgba(13,17,23,0.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
     .nav-logo{font-family:var(--font-en);font-size:0.95rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);text-decoration:none}
     .nav-links{display:flex;list-style:none}
@@ -23,23 +25,48 @@
     .nav-links>li:hover .dropdown{display:block}
     .dropdown li a{display:block;padding:0.7rem 1.4rem;font-family:var(--font-en);font-size:0.75rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.15s,background 0.15s}
     .dropdown li a:hover{color:var(--white);background:rgba(74,144,217,0.08)}
+    .dropdown li a.active{color:var(--accent2)}
 
-    .page-header{padding:calc(var(--nav-h) + 5rem) 3rem 3rem;max-width:1200px;margin:0 auto}
+    /* PAGE HEADER */
+    .page-header{padding:calc(var(--nav-h) + 5rem) 3rem 0;max-width:1200px;margin:0 auto}
     .page-eyebrow{font-family:var(--font-en);font-size:0.7rem;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
-    .page-title{font-family:var(--font-en);font-size:clamp(2rem,4vw,3.5rem);font-weight:800;color:var(--white);letter-spacing:-0.02em}
+    .page-title{font-family:var(--font-en);font-size:clamp(2rem,4vw,3.5rem);font-weight:800;color:var(--white);letter-spacing:-0.02em;margin-bottom:2.5rem}
 
+    /* FILTER TAB BAR */
+    .filter-bar{display:flex;align-items:center;border-bottom:1px solid var(--border);padding:0 3rem;max-width:1260px;margin:0 auto}
+    .filter-tab{padding:0.9rem 1.5rem;font-family:var(--font-en);font-size:0.78rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color 0.2s,border-color 0.2s}
+    .filter-tab:hover{color:var(--white)}
+    .filter-tab.active{color:var(--white);border-bottom-color:var(--accent)}
+    .filter-count{display:inline-block;margin-left:0.45rem;padding:0.1rem 0.45rem;font-size:0.62rem;background:var(--surface);border:1px solid var(--border);border-radius:2px;color:var(--muted);vertical-align:middle;font-weight:400;letter-spacing:0.05em;transition:background 0.2s,color 0.2s}
+    .filter-tab.active .filter-count{background:var(--accent);border-color:var(--accent);color:var(--white)}
+
+    /* GRID */
     .grid-wrap{max-width:1200px;margin:0 auto;padding:2rem 3rem 6rem}
     .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
     .work-card{position:relative;overflow:hidden;aspect-ratio:3/4;background:var(--surface);cursor:pointer}
+    .work-card.hidden{display:none}
     .work-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s cubic-bezier(.25,.46,.45,.94)}
     .work-card:hover img{transform:scale(1.04)}
     .work-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.65);opacity:0;transition:opacity 0.35s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.75rem 1.5rem}
     .work-card:hover .work-overlay{opacity:1}
     .work-brand{font-family:var(--font-en);font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.4rem}
-    .work-project{font-family:var(--font-en);font-size:1rem;font-weight:600;color:var(--white);margin-bottom:0.3rem;line-height:1.3}
-    .work-date{font-family:var(--font-en);font-size:0.7rem;color:rgba(255,255,255,0.5);letter-spacing:0.1em}
+    .work-project{font-family:var(--font-en);font-size:1rem;font-weight:600;color:var(--white);margin-bottom:0.4rem;line-height:1.3}
+    .work-date{font-family:var(--font-en);font-size:0.7rem;color:rgba(255,255,255,0.5);letter-spacing:0.1em;margin-bottom:0.75rem}
+    .work-tag{display:inline-block;padding:0.25rem 0.6rem;font-family:var(--font-en);font-size:0.62rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;background:rgba(74,144,217,0.2);border:1px solid rgba(74,144,217,0.4);color:var(--accent2)}
     .work-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.6rem;color:var(--border);font-family:var(--font-en);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase}
 
+    /* VIDEO CARD (16:9) */
+    .video-card{position:relative;overflow:hidden;background:var(--surface);cursor:pointer}
+    .video-card.hidden{display:none}
+    .video-thumb{position:relative;aspect-ratio:16/9;background:var(--bg);overflow:hidden}
+    .video-thumb iframe{width:100%;height:100%;border:none;display:block}
+    .video-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem}
+    .play-btn{width:52px;height:52px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .video-info{padding:1.1rem 1.25rem;border-top:1px solid var(--border)}
+    .video-title{font-size:0.92rem;font-weight:500;color:var(--white);margin-bottom:0.3rem}
+    .video-meta{font-family:var(--font-en);font-size:0.7rem;letter-spacing:0.08em;color:var(--muted)}
+
+    /* LIGHTBOX */
     .lightbox{display:none;position:fixed;inset:0;z-index:200;background:rgba(7,11,17,0.96);align-items:center;justify-content:center}
     .lightbox.open{display:flex}
     .lightbox img{max-width:90vw;max-height:88vh;object-fit:contain;border:1px solid var(--border)}
@@ -50,11 +77,13 @@
     .footer-copy{font-family:var(--font-en);font-size:0.72rem;color:var(--muted);letter-spacing:0.06em}
     .footer-back{font-family:var(--font-en);font-size:0.72rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:color 0.2s}
     .footer-back:hover{color:var(--accent2)}
-    @media(max-width:900px){nav{padding:0 1.5rem}.page-header{padding:calc(var(--nav-h)+3rem) 1.5rem 2rem}.grid-wrap{padding:2rem 1.5rem 4rem}}
+
+    @media(max-width:900px){nav{padding:0 1.5rem}.page-header,.filter-bar,.grid-wrap{padding-left:1.5rem;padding-right:1.5rem}}
     @media(max-width:600px){.nav-links{display:none}.work-grid{grid-template-columns:repeat(2,1fr)}footer{flex-direction:column;gap:1rem;text-align:center}}
   </style>
 </head>
 <body>
+
 <nav>
   <a class="nav-logo" href="index.html">Baek Seokhyun</a>
   <ul class="nav-links">
@@ -62,12 +91,20 @@
     <li>
       <a href="photography.html">Photography <span class="chevron"></span></a>
       <ul class="dropdown">
-        <li><a href="photography.html#food">Food</a></li>
-        <li><a href="photography.html#product">Product</a></li>
+        <li><a href="photography.html">All</a></li>
+        <li><a href="photography.html?filter=food">Food</a></li>
+        <li><a href="photography.html?filter=product">Product</a></li>
       </ul>
     </li>
     <li><a href="video.html">Video</a></li>
-    <li><a href="ai.html" class="active">AI Content</a></li>
+    <li>
+      <a href="ai.html" class="active">AI Content <span class="chevron"></span></a>
+      <ul class="dropdown">
+        <li><a href="ai.html" id="dd-all">All</a></li>
+        <li><a href="ai.html?filter=photography" id="dd-photo">Photography</a></li>
+        <li><a href="ai.html?filter=video" id="dd-video">Video</a></li>
+      </ul>
+    </li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
 </nav>
@@ -77,25 +114,56 @@
   <h1 class="page-title">AI Content</h1>
 </div>
 
+<!-- FILTER TAB BAR -->
+<div class="filter-bar">
+  <button class="filter-tab active" data-filter="all">
+    All <span class="filter-count" id="count-all">0</span>
+  </button>
+  <button class="filter-tab" data-filter="photography">
+    Photography <span class="filter-count" id="count-photography">0</span>
+  </button>
+  <button class="filter-tab" data-filter="video">
+    Video <span class="filter-count" id="count-video">0</span>
+  </button>
+</div>
+
 <div class="grid-wrap">
-  <div class="work-grid">
+  <div class="work-grid" id="workGrid">
+
     <!--
-      이미지 추가 예시:
-      <div class="work-card" onclick="openLightbox(this)">
-        <img src="https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/w_800/ai-image.jpg" alt=""/>
-        <div class="work-overlay">
-          <p class="work-brand">툴명 (예: Midjourney)</p>
-          <p class="work-project">프로젝트명</p>
-          <p class="work-date">2025</p>
-        </div>
+    ──────────────────────────────────────────
+    AI Photography 이미지 추가 예시:
+    <div class="work-card" data-category="photography" onclick="openLightbox(this)">
+      <img src="https://res.cloudinary.com/cfljj4qd/image/upload/w_800/파일명.jpg" alt=""/>
+      <div class="work-overlay">
+        <p class="work-brand">Midjourney</p>
+        <p class="work-project">프로젝트명</p>
+        <p class="work-date">2025</p>
+        <span class="work-tag">#photography</span>
       </div>
+    </div>
+
+    AI Video 추가 예시:
+    <div class="video-card" data-category="video">
+      <div class="video-thumb">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+      </div>
+      <div class="video-info">
+        <p class="video-title">프로젝트명</p>
+        <p class="video-meta">Sora · 2025 · #video</p>
+      </div>
+    </div>
+    ──────────────────────────────────────────
     -->
-    <div class="work-card"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>AI 이미지 추가</div></div>
-    <div class="work-card"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>AI 이미지 추가</div></div>
-    <div class="work-card"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>AI 이미지 추가</div></div>
-    <div class="work-card"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>AI 이미지 추가</div></div>
-    <div class="work-card"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>AI 이미지 추가</div></div>
-    <div class="work-card"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>AI 이미지 추가</div></div>
+
+    <!-- 플레이스홀더 -->
+    <div class="work-card" data-category="photography"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>#photography 이미지 추가</div></div>
+    <div class="work-card" data-category="photography"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>#photography 이미지 추가</div></div>
+    <div class="work-card" data-category="photography"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>#photography 이미지 추가</div></div>
+    <div class="video-card" data-category="video"><div class="video-thumb"><div class="video-placeholder"><div class="play-btn"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3.5l7 4.5-7 4.5V3.5z" fill="#4a90d9"/></svg></div><span style="font-family:var(--font-en);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">#video 추가</span></div></div><div class="video-info"><p class="video-title">AI Video 제목</p><p class="video-meta">Tool · Year · #video</p></div></div>
+    <div class="video-card" data-category="video"><div class="video-thumb"><div class="video-placeholder"><div class="play-btn"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3.5l7 4.5-7 4.5V3.5z" fill="#4a90d9"/></svg></div><span style="font-family:var(--font-en);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">#video 추가</span></div></div><div class="video-info"><p class="video-title">AI Video 제목</p><p class="video-meta">Tool · Year · #video</p></div></div>
+    <div class="video-card" data-category="video"><div class="video-thumb"><div class="video-placeholder"><div class="play-btn"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3.5l7 4.5-7 4.5V3.5z" fill="#4a90d9"/></svg></div><span style="font-family:var(--font-en);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">#video 추가</span></div></div><div class="video-info"><p class="video-title">AI Video 제목</p><p class="video-meta">Tool · Year · #video</p></div></div>
+
   </div>
 </div>
 
@@ -108,10 +176,49 @@
   <button class="lightbox-close" id="lightboxClose">×</button>
   <img id="lightboxImg" src="" alt=""/>
 </div>
+
 <script>
-  function openLightbox(card){const img=card.querySelector('img');if(!img)return;document.getElementById('lightboxImg').src=img.src;document.getElementById('lightbox').classList.add('open')}
+  const cards = document.querySelectorAll('.work-card, .video-card');
+  const tabs  = document.querySelectorAll('.filter-tab');
+
+  function updateCounts(){
+    document.getElementById('count-all').textContent         = cards.length;
+    document.getElementById('count-photography').textContent = [...cards].filter(c=>c.dataset.category==='photography').length;
+    document.getElementById('count-video').textContent       = [...cards].filter(c=>c.dataset.category==='video').length;
+  }
+  updateCounts();
+
+  function applyFilter(filter){
+    cards.forEach(card=>{
+      card.classList.toggle('hidden', filter!=='all' && card.dataset.category!==filter);
+    });
+    tabs.forEach(t=>t.classList.toggle('active', t.dataset.filter===filter));
+    document.getElementById('dd-all').classList.toggle('active',   filter==='all');
+    document.getElementById('dd-photo').classList.toggle('active', filter==='photography');
+    document.getElementById('dd-video').classList.toggle('active', filter==='video');
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  applyFilter(params.get('filter') || 'all');
+
+  tabs.forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      const f = tab.dataset.filter;
+      applyFilter(f);
+      history.replaceState(null,'', f==='all' ? 'ai.html' : `ai.html?filter=${f}`);
+    });
+  });
+
+  function openLightbox(card){
+    const img=card.querySelector('img');
+    if(!img)return;
+    document.getElementById('lightboxImg').src=img.src;
+    document.getElementById('lightbox').classList.add('open');
+  }
   document.getElementById('lightboxClose').addEventListener('click',()=>document.getElementById('lightbox').classList.remove('open'));
-  document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))document.getElementById('lightbox').classList.remove('open')});
+  document.getElementById('lightbox').addEventListener('click',e=>{
+    if(e.target===document.getElementById('lightbox'))document.getElementById('lightbox').classList.remove('open');
+  });
 </script>
 </body>
 </html>
