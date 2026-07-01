@@ -224,17 +224,18 @@ if (project) {
 
 const images = project?.images || [];
 let currentIdx = 0;
-function openLightbox(idx){ if(window.wasDragged && window.wasDragged())return; currentIdx=idx; updateLightbox(); document.getElementById('lightbox').classList.add('open'); }
+function openLightbox(idx){ if(window.wasDragged && window.wasDragged())return; currentIdx=idx; updateLightbox(); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
 function updateLightbox(){ document.getElementById('lightboxImg').src=images[currentIdx]; document.getElementById('lightboxCounter').textContent=`${currentIdx+1} / ${images.length}`; }
-document.getElementById('lightboxClose').addEventListener('click',()=>document.getElementById('lightbox').classList.remove('open'));
+document.getElementById('lightboxClose').addEventListener('click',closeLightbox);
 document.getElementById('lightboxPrev').addEventListener('click',()=>{ currentIdx=(currentIdx-1+images.length)%images.length; updateLightbox(); });
 document.getElementById('lightboxNext').addEventListener('click',()=>{ currentIdx=(currentIdx+1)%images.length; updateLightbox(); });
-document.getElementById('lightbox').addEventListener('click',e=>{ if(e.target===document.getElementById('lightbox'))document.getElementById('lightbox').classList.remove('open'); });
+document.getElementById('lightbox').addEventListener('click',e=>{ if(e.target===document.getElementById('lightbox'))closeLightbox(); });
 document.addEventListener('keydown',e=>{
   if(!document.getElementById('lightbox').classList.contains('open'))return;
   if(e.key==='ArrowLeft'){currentIdx=(currentIdx-1+images.length)%images.length;updateLightbox();}
   if(e.key==='ArrowRight'){currentIdx=(currentIdx+1)%images.length;updateLightbox();}
-  if(e.key==='Escape')document.getElementById('lightbox').classList.remove('open');
+  if(e.key==='Escape')closeLightbox();
 });
 
 // ── 라이트박스 터치 스와이프 (모바일) ──
