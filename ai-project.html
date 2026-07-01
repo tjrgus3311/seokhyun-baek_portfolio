@@ -129,55 +129,12 @@
   <p class="lightbox-counter" id="lightboxCounter"></p>
 </div>
 
+<script src="projects.js"></script>
 <script>
-// ──────────────────────────────────────────────────────────────
-// AI 프로젝트 데이터베이스
-// category: "photography" 또는 "video"
-// ──────────────────────────────────────────────────────────────
-const AI_PROJECTS = {
-
-  "lelabo-workspec": {
-    brand:    "Le Labo",
-    title:    "Work Spec",
-    date:     "2026",
-    category: "photography",
-    images: [
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782874332/%E1%84%85%E1%85%B3%E1%84%85%E1%85%A1%E1%84%87%E1%85%A9_%E1%84%83%E1%85%A1%E1%86%AB%E1%84%8E%E1%85%A6_01_opqajw.jpg",
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782874332/%E1%84%85%E1%85%B3%E1%84%85%E1%85%A1%E1%84%87%E1%85%A9_%E1%84%8B%E1%85%A5%E1%84%82%E1%85%A1%E1%84%83%E1%85%A513_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF02_wmgz09.jpg",
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782874332/%E1%84%85%E1%85%B3%E1%84%85%E1%85%A1%E1%84%87%E1%85%A9_%E1%84%82%E1%85%A6%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B536_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF01_rmabvf.jpg",
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782874332/%E1%84%85%E1%85%B3%E1%84%85%E1%85%A1%E1%84%87%E1%85%A9_%E1%84%87%E1%85%A6%E1%84%85%E1%85%B3%E1%84%80%E1%85%A1%E1%84%86%E1%85%A9%E1%86%BA22_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF02_wpwuip.jpg",
-    ]
-  },
-
-  /*
-  예시 - AI Photography:
-  "ai-food-concept": {
-    brand:    "Midjourney",
-    title:    "Food Concept Series",
-    date:     "2025",
-    category: "photography",
-    desc:     ["AI를 활용한 식품 비주얼 컨셉 시리즈입니다.", "Midjourney v6를 사용하여 제작했습니다."],
-    images: [
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/ai_food_01.jpg",
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/ai_food_02.jpg",
-    ]
-  },
-  예시 - AI Video:
-  "ai-product-video": {
-    brand:    "Sora",
-    title:    "Product Motion",
-    date:     "2025",
-    category: "video",
-    desc:     ["AI 영상 생성 툴을 활용한 제품 모션 컨텐츠입니다."],
-    videoIds: ["유튜브_VIDEO_ID_1", "유튜브_VIDEO_ID_2"],
-    images:   []
-  },
-  */
-};
-
+// projects.js에서 프로젝트 데이터를 가져옵니다.
 const params  = new URLSearchParams(window.location.search);
 const id      = params.get('id');
-const project = AI_PROJECTS[id];
+const project = getProject(id);
 
 if (project) {
   document.title = `${project.title} — BAEK SEOKHYUN`;

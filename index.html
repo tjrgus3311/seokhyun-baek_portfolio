@@ -193,55 +193,39 @@
   <img id="lightboxImg" src="" alt=""/>
 </div>
 
+<script src="projects.js"></script>
 <script>
-  // ──────────────────────────────────────────────────────────────
-  // 홈에 보여줄 사진 콘텐츠 (Photography + AI Photography)
-  // 새 작업 추가 시 이 배열 맨 위에 추가하면 됩니다.
-  //   type: 'photo' → project.html로 이동
-  //   type: 'ai'    → ai-project.html로 이동
-  // ──────────────────────────────────────────────────────────────
-  const HOME_WORKS = [
-    {
-      type:    "ai",            // ai-project.html?id=... 로 연결
-      id:      "lelabo-workspec",
-      img:     "https://res.cloudinary.com/cfljj4qd/image/upload/w_800/v1782874332/%E1%84%85%E1%85%B3%E1%84%85%E1%85%A1%E1%84%87%E1%85%A9_%E1%84%83%E1%85%A1%E1%86%AB%E1%84%8E%E1%85%A6_01_opqajw.jpg",
-      brand:   "Le Labo",
-      project: "Work Spec",
-      date:    "2026",
-    },
-    // 여기에 새 작업 추가:
-    // { type:"photo", id:"프로젝트id", img:"URL", brand:"브랜드", project:"프로젝트명", date:"2025" },
-  ];
+  // 홈에는 사진 콘텐츠(Photography + AI Photography)만 표시 (영상 제외)
+  const homeWorks = getHomeWorks();
 
   const LIMIT = 10; // 홈에 최대로 보여줄 개수
   const grid = document.getElementById('workGrid');
   const showMoreWrap = document.getElementById('showMoreWrap');
 
-  if (HOME_WORKS.length === 0) {
-    // 작업물이 없을 때 placeholder 표시
+  if (homeWorks.length === 0) {
     grid.innerHTML = Array(6).fill('<div class="work-card"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>이미지 추가</div></div>').join('');
   } else {
-    const visible = HOME_WORKS.slice(0, LIMIT);
+    const visible = homeWorks.slice(0, LIMIT);
     grid.innerHTML = visible.map(w => {
-      const link = w.type === 'ai' ? `ai-project.html?id=${w.id}` : `project.html?id=${w.id}`;
+      const link = w.section === 'ai' ? `ai-project.html?id=${w.id}` : `project.html?id=${w.id}`;
       return `
         <div class="work-card" onclick="location.href='${link}'">
-          <img src="${w.img}" alt="${w.project}" loading="lazy"/>
+          <img src="${thumb(w.images[0])}" alt="${w.title}" loading="lazy"/>
           <div class="work-overlay">
             <p class="work-brand">${w.brand}</p>
-            <p class="work-project">${w.project}</p>
+            <p class="work-project">${w.title}</p>
             <p class="work-date">${w.date}</p>
           </div>
         </div>`;
     }).join('');
 
     // 10개를 초과하면 Show more 노출
-    if (HOME_WORKS.length > LIMIT) {
+    if (homeWorks.length > LIMIT) {
       showMoreWrap.style.display = 'flex';
     }
   }
 
-  // 라이트박스 (현재는 상세페이지로 이동하므로 미사용, 호환 위해 유지)
+  // 라이트박스 (호환용)
   function openLightbox(card){
     const img=card.querySelector('img');
     if(!img)return;

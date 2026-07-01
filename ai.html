@@ -127,51 +127,7 @@
 
 <div class="grid-wrap">
   <div class="work-grid" id="workGrid">
-
-    <!--
-    ──────────────────────────────────────────
-    AI Photography 이미지 추가 예시:
-    <div class="work-card" data-category="photography" onclick="openLightbox(this)">
-      <img src="https://res.cloudinary.com/cfljj4qd/image/upload/w_800/파일명.jpg" alt=""/>
-      <div class="work-overlay">
-        <p class="work-brand">Midjourney</p>
-        <p class="work-project">프로젝트명</p>
-        <p class="work-date">2025</p>
-        <span class="work-tag">#photography</span>
-      </div>
-    </div>
-
-    AI Video 추가 예시:
-    <div class="video-card" data-category="video">
-      <div class="video-thumb">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
-      </div>
-      <div class="video-info">
-        <p class="video-title">프로젝트명</p>
-        <p class="video-meta">Sora · 2025 · #video</p>
-      </div>
-    </div>
-    ──────────────────────────────────────────
-    -->
-
-    <!-- Le Labo 프로젝트 -->
-    <div class="work-card" data-category="photography" onclick="goToProject('lelabo-workspec')">
-      <img src="https://res.cloudinary.com/cfljj4qd/image/upload/w_800/v1782874332/%E1%84%85%E1%85%B3%E1%84%85%E1%85%A1%E1%84%87%E1%85%A9_%E1%84%83%E1%85%A1%E1%86%AB%E1%84%8E%E1%85%A6_01_opqajw.jpg" alt="Le Labo"/>
-      <div class="work-overlay">
-        <p class="work-brand">Le Labo</p>
-        <p class="work-project">Work Spec</p>
-        <p class="work-date">2026</p>
-        <span class="work-tag">#photography</span>
-      </div>
-    </div>
-
-    <!-- 플레이스홀더 -->
-    <div class="work-card" data-category="photography"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>#photography 이미지 추가</div></div>
-    <div class="work-card" data-category="photography"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>#photography 이미지 추가</div></div>
-    <div class="video-card" data-category="video"><div class="video-thumb"><div class="video-placeholder"><div class="play-btn"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3.5l7 4.5-7 4.5V3.5z" fill="#4a90d9"/></svg></div><span style="font-family:var(--font-en);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">#video 추가</span></div></div><div class="video-info"><p class="video-title">AI Video 제목</p><p class="video-meta">Tool · Year · #video</p></div></div>
-    <div class="video-card" data-category="video"><div class="video-thumb"><div class="video-placeholder"><div class="play-btn"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3.5l7 4.5-7 4.5V3.5z" fill="#4a90d9"/></svg></div><span style="font-family:var(--font-en);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">#video 추가</span></div></div><div class="video-info"><p class="video-title">AI Video 제목</p><p class="video-meta">Tool · Year · #video</p></div></div>
-    <div class="video-card" data-category="video"><div class="video-thumb"><div class="video-placeholder"><div class="play-btn"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3.5l7 4.5-7 4.5V3.5z" fill="#4a90d9"/></svg></div><span style="font-family:var(--font-en);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">#video 추가</span></div></div><div class="video-info"><p class="video-title">AI Video 제목</p><p class="video-meta">Tool · Year · #video</p></div></div>
-
+    <!-- projects.js 데이터로 자동 생성됨 -->
   </div>
 </div>
 
@@ -185,14 +141,47 @@
   <img id="lightboxImg" src="" alt=""/>
 </div>
 
+<script src="projects.js"></script>
 <script>
+  // projects.js에서 AI Content 프로젝트 불러오기
+  const works = getBySection('ai');
+  const grid  = document.getElementById('workGrid');
+
+  if (works.length === 0) {
+    grid.innerHTML = Array(3).fill('<div class="work-card" data-category="none"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>이미지 준비 중</div></div>').join('');
+  } else {
+    grid.innerHTML = works.map(w => {
+      if (w.category === 'video' && w.videoIds && w.videoIds.length) {
+        // 영상 카드 (대표 영상 썸네일)
+        return `
+          <div class="video-card" data-category="video" onclick="goToProject('${w.id}')" style="cursor:pointer">
+            <div class="video-thumb">
+              <img src="https://img.youtube.com/vi/${w.videoIds[0]}/hqdefault.jpg" alt="${w.title}" style="width:100%;height:100%;object-fit:cover"/>
+            </div>
+            <div class="video-info"><p class="video-title">${w.title}</p><p class="video-meta">${w.brand} · ${w.date} · #video</p></div>
+          </div>`;
+      }
+      // 이미지 카드
+      return `
+        <div class="work-card" data-category="${w.category}" onclick="goToProject('${w.id}')">
+          <img src="${thumb(w.images[0])}" alt="${w.title}" loading="lazy"/>
+          <div class="work-overlay">
+            <p class="work-brand">${w.brand}</p>
+            <p class="work-project">${w.title}</p>
+            <p class="work-date">${w.date}</p>
+            <span class="work-tag">#${w.category}</span>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
   const cards = document.querySelectorAll('.work-card, .video-card');
   const tabs  = document.querySelectorAll('.filter-tab');
 
   function updateCounts(){
-    document.getElementById('count-all').textContent         = cards.length;
-    document.getElementById('count-photography').textContent = [...cards].filter(c=>c.dataset.category==='photography').length;
-    document.getElementById('count-video').textContent       = [...cards].filter(c=>c.dataset.category==='video').length;
+    document.getElementById('count-all').textContent         = works.length;
+    document.getElementById('count-photography').textContent = works.filter(w=>w.category==='photography').length;
+    document.getElementById('count-video').textContent       = works.filter(w=>w.category==='video').length;
   }
   updateCounts();
 
@@ -201,16 +190,12 @@
       card.classList.toggle('hidden', filter!=='all' && card.dataset.category!==filter);
     });
     tabs.forEach(t=>t.classList.toggle('active', t.dataset.filter===filter));
-    // sync dropdown (href 기반으로 안전하게 처리)
     document.querySelectorAll('.dropdown a[href^="ai.html"]').forEach(a=>{
       const href = a.getAttribute('href');
-      const isAll   = href === 'ai.html';
-      const isPhoto = href.includes('filter=photography');
-      const isVideo = href.includes('filter=video');
       a.classList.toggle('active',
-        (filter==='all' && isAll) ||
-        (filter==='photography' && isPhoto) ||
-        (filter==='video' && isVideo)
+        (filter==='all' && href==='ai.html') ||
+        (filter==='photography' && href.includes('filter=photography')) ||
+        (filter==='video' && href.includes('filter=video'))
       );
     });
   }
@@ -226,9 +211,7 @@
     });
   });
 
-  function goToProject(id) {
-    window.location.href = 'ai-project.html?id=' + id;
-  }
+  function goToProject(id){ window.location.href = 'ai-project.html?id=' + id; }
 
   function openLightbox(card){
     const img=card.querySelector('img');

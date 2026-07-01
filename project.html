@@ -211,46 +211,12 @@
   <p class="lightbox-counter" id="lightboxCounter"></p>
 </div>
 
+<script src="projects.js"></script>
 <script>
-// ──────────────────────────────────────────────────────────────
-// 프로젝트 데이터베이스
-// 새 프로젝트 추가 시 이 객체에만 추가하면 됩니다.
-// images 배열에 Cloudinary URL을 순서대로 넣어주세요.
-// ──────────────────────────────────────────────────────────────
-const PROJECTS = {
-
-  /*
-  예시:
-  "jungmiso-almond": {
-    brand:    "정미소",
-    title:    "아몬드 스프레드 캠페인",
-    date:     "2025",
-    category: "food",
-    desc:     ["프로젝트 설명 첫 번째 단락.", "두 번째 단락."],
-    images: [
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/jungmiso_01.jpg",
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/jungmiso_02.jpg",
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/jungmiso_03.jpg",
-    ]
-  },
-  "lelabo-neroli": {
-    brand:    "Le Labo",
-    title:    "Neroli 36 Product",
-    date:     "2024",
-    category: "product",
-    desc:     ["프로덕트 촬영 설명."],
-    images: [
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/lelabo_01.jpg",
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/lelabo_02.jpg",
-    ]
-  },
-  */
-};
-
-// URL에서 id 파라미터 읽기
+// projects.js에서 프로젝트 데이터를 가져옵니다.
 const params  = new URLSearchParams(window.location.search);
 const id      = params.get('id');
-const project = PROJECTS[id];
+const project = getProject(id);
 
 if (project) {
   // 프로젝트 정보 렌더링

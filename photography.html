@@ -180,40 +180,7 @@
 <!-- GRID -->
 <div class="grid-wrap">
   <div class="work-grid" id="workGrid">
-
-    <!--
-    ──────────────────────────────────────────
-    이미지 추가 예시 (data-category 반드시 입력):
-
-    <div class="work-card" data-category="food" onclick="openLightbox(this)">
-      <img src="https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/w_800/food-image.jpg" alt="정미소 아몬드 스프레드"/>
-      <div class="work-overlay">
-        <p class="work-brand">정미소</p>
-        <p class="work-project">아몬드 스프레드 캠페인</p>
-        <p class="work-date">2025</p>
-        <span class="work-tag">#food</span>
-      </div>
-    </div>
-
-    <div class="work-card" data-category="product" onclick="openLightbox(this)">
-      <img src="https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/w_800/product-image.jpg" alt="Le Labo"/>
-      <div class="work-overlay">
-        <p class="work-brand">Le Labo</p>
-        <p class="work-project">Neroli 36 프로덕트 촬영</p>
-        <p class="work-date">2024</p>
-        <span class="work-tag">#product</span>
-      </div>
-    </div>
-    ──────────────────────────────────────────
-    -->
-
-    <!-- 플레이스홀더: 실제 이미지 추가 후 아래 항목들을 지우세요 -->
-    <div class="work-card" data-category="product"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>#product 이미지 추가</div></div>
-    <div class="work-card" data-category="food"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>#food 이미지 추가</div></div>
-    <div class="work-card" data-category="product"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>#product 이미지 추가</div></div>
-    <div class="work-card" data-category="food"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>#food 이미지 추가</div></div>
-    <div class="work-card" data-category="product"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>#product 이미지 추가</div></div>
-
+    <!-- projects.js 데이터로 자동 생성됨 -->
   </div>
 </div>
 
@@ -227,65 +194,66 @@
   <img id="lightboxImg" src="" alt=""/>
 </div>
 
+<script src="projects.js"></script>
 <script>
+  // projects.js에서 Photography 프로젝트 불러와 그리드 생성
+  const works = getBySection('photography');
+  const grid  = document.getElementById('workGrid');
+
+  if (works.length === 0) {
+    grid.innerHTML = Array(4).fill('<div class="work-card" data-category="none"><div class="work-placeholder"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>이미지 준비 중</div></div>').join('');
+  } else {
+    grid.innerHTML = works.map(w => `
+      <div class="work-card" data-category="${w.category}" onclick="goToProject('${w.id}')">
+        <img src="${thumb(w.images[0])}" alt="${w.title}" loading="lazy"/>
+        <div class="work-overlay">
+          <p class="work-brand">${w.brand}</p>
+          <p class="work-project">${w.title}</p>
+          <p class="work-date">${w.date}</p>
+          <span class="work-tag">#${w.category}</span>
+        </div>
+      </div>`).join('');
+  }
+
   const cards = document.querySelectorAll('.work-card');
   const tabs  = document.querySelectorAll('.filter-tab');
 
   // count badges
-  function updateCounts(active){
-    const all     = cards.length;
-    const food    = [...cards].filter(c=>c.dataset.category==='food').length;
-    const product = [...cards].filter(c=>c.dataset.category==='product').length;
-    document.getElementById('count-all').textContent     = all;
-    document.getElementById('count-food').textContent    = food;
-    document.getElementById('count-product').textContent = product;
+  function updateCounts(){
+    document.getElementById('count-all').textContent     = works.length;
+    document.getElementById('count-food').textContent    = works.filter(w=>w.category==='food').length;
+    document.getElementById('count-product').textContent = works.filter(w=>w.category==='product').length;
   }
   updateCounts();
 
   // filter
   function applyFilter(filter){
     cards.forEach(card=>{
-      if(filter==='all'||card.dataset.category===filter){
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
-      }
+      card.classList.toggle('hidden', !(filter==='all' || card.dataset.category===filter));
     });
     tabs.forEach(t=>t.classList.toggle('active', t.dataset.filter===filter));
-    // sync dropdown
-    // sync dropdown (href 기반으로 안전하게 처리)
     document.querySelectorAll('.dropdown a[href^="photography.html"]').forEach(a=>{
       const href = a.getAttribute('href');
-      const isAll     = href === 'photography.html';
-      const isFood    = href.includes('filter=food');
-      const isProduct = href.includes('filter=product');
       a.classList.toggle('active',
-        (filter==='all' && isAll) ||
-        (filter==='food' && isFood) ||
-        (filter==='product' && isProduct)
+        (filter==='all' && href==='photography.html') ||
+        (filter==='food' && href.includes('filter=food')) ||
+        (filter==='product' && href.includes('filter=product'))
       );
     });
   }
 
-  // read URL param on load
   const params = new URLSearchParams(window.location.search);
-  const initFilter = params.get('filter') || 'all';
-  applyFilter(initFilter);
+  applyFilter(params.get('filter') || 'all');
 
-  // tab click
   tabs.forEach(tab=>{
     tab.addEventListener('click',()=>{
       const f = tab.dataset.filter;
       applyFilter(f);
-      const url = f==='all' ? 'photography.html' : `photography.html?filter=${f}`;
-      history.replaceState(null,'',url);
+      history.replaceState(null,'', f==='all' ? 'photography.html' : `photography.html?filter=${f}`);
     });
   });
 
-  // lightbox
-  function goToProject(id) {
-    window.location.href = 'project.html?id=' + id;
-  }
+  function goToProject(id){ window.location.href = 'project.html?id=' + id; }
 
   function openLightbox(card){
     const img=card.querySelector('img');
