@@ -209,6 +209,10 @@
     });
   });
 
+  function goToProject(id) {
+    window.location.href = 'ai-project.html?id=' + id;
+  }
+
   function openLightbox(card){
     const img=card.querySelector('img');
     if(!img)return;

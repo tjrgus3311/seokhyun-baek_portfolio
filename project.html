@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Project — BAEK SEOKHYUN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0d1117;--surface:#1a2233;--border:#1e2d42;--text:#e0e6f0;--muted:#5a7a99;--accent:#4a90d9;--accent2:#6ab0f5;--white:#ffffff;--nav-h:60px;--font-en:'Inter',sans-serif;--font-kr:'Noto Sans KR',sans-serif}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-kr);font-weight:300;-webkit-font-smoothing:antialiased}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:var(--nav-h);background:rgba(13,17,23,0.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:var(--font-en);font-size:0.95rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);text-decoration:none}
+    .nav-links{display:flex;list-style:none}
+    .nav-links>li{position:relative}
+    .nav-links>li>a{display:flex;align-items:center;gap:0.3rem;padding:0 1.3rem;height:var(--nav-h);line-height:var(--nav-h);font-family:var(--font-en);font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;white-space:nowrap}
+    .nav-links>li>a:hover,.nav-links>li>a.active{color:var(--white)}
+    .nav-links>li>a.active::after{content:'';position:absolute;bottom:0;left:1.3rem;right:1.3rem;height:2px;background:var(--accent)}
+    .chevron{display:inline-block;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid var(--muted);transition:transform 0.2s,border-top-color 0.2s;margin-top:1px}
+    .nav-links>li:hover .chevron{transform:rotate(180deg);border-top-color:var(--white)}
+    .dropdown{display:none;position:absolute;top:calc(var(--nav-h) - 1px);left:0;min-width:160px;background:rgba(19,25,35,0.97);border:1px solid var(--border);border-top:2px solid var(--accent);backdrop-filter:blur(16px);list-style:none}
+    .nav-links>li:hover .dropdown{display:block}
+    .dropdown li a{display:block;padding:0.7rem 1.4rem;font-family:var(--font-en);font-size:0.75rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.15s,background 0.15s}
+    .dropdown li a:hover{color:var(--white);background:rgba(74,144,217,0.08)}
+
+    /* BACK BUTTON */
+    .back-btn{
+      display:inline-flex;align-items:center;gap:0.5rem;
+      margin:calc(var(--nav-h) + 3rem) 0 0 3rem;
+      font-family:var(--font-en);font-size:0.75rem;font-weight:400;
+      letter-spacing:0.12em;text-transform:uppercase;
+      color:var(--muted);text-decoration:none;
+      transition:color 0.2s;
+    }
+    .back-btn:hover{color:var(--accent2)}
+    .back-btn svg{transition:transform 0.2s}
+    .back-btn:hover svg{transform:translateX(-3px)}
+
+    /* PROJECT INFO */
+    .project-info{
+      max-width:1200px;margin:0 auto;
+      padding:2.5rem 3rem 3.5rem;
+      display:grid;grid-template-columns:1fr 2fr;
+      gap:4rem;align-items:start;
+      border-bottom:1px solid var(--border);
+    }
+    .project-meta{}
+    .project-tag{
+      display:inline-block;margin-bottom:1.2rem;
+      padding:0.25rem 0.7rem;
+      font-family:var(--font-en);font-size:0.65rem;font-weight:500;
+      letter-spacing:0.14em;text-transform:uppercase;
+      background:rgba(74,144,217,0.15);
+      border:1px solid rgba(74,144,217,0.35);
+      color:var(--accent2);
+    }
+    .project-brand{
+      font-family:var(--font-en);font-size:0.72rem;font-weight:400;
+      letter-spacing:0.22em;text-transform:uppercase;
+      color:var(--accent);margin-bottom:0.6rem;
+    }
+    .project-title{
+      font-family:var(--font-en);font-size:clamp(1.8rem,3vw,2.8rem);
+      font-weight:800;color:var(--white);
+      letter-spacing:-0.02em;line-height:1.1;
+      margin-bottom:1rem;
+    }
+    .project-date{
+      font-family:var(--font-en);font-size:0.75rem;
+      color:var(--muted);letter-spacing:0.1em;
+    }
+    .project-desc{
+      font-size:0.97rem;color:var(--muted);
+      line-height:1.9;padding-top:0.5rem;
+    }
+    .project-desc p{margin-bottom:1rem}
+    .project-desc p:last-child{margin-bottom:0}
+
+    /* IMAGE GRID */
+    .grid-wrap{max-width:1200px;margin:0 auto;padding:3rem 3rem 6rem}
+    .image-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+    .img-card{
+      position:relative;overflow:hidden;
+      aspect-ratio:3/4;background:var(--surface);cursor:pointer;
+    }
+    .img-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s cubic-bezier(.25,.46,.45,.94)}
+    .img-card:hover img{transform:scale(1.04)}
+    .img-card-overlay{
+      position:absolute;inset:0;
+      background:rgba(0,0,0,0.5);
+      opacity:0;transition:opacity 0.3s;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .img-card:hover .img-card-overlay{opacity:1}
+    .zoom-icon{
+      width:44px;height:44px;
+      border:1px solid rgba(255,255,255,0.5);border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      color:var(--white);
+    }
+    .img-placeholder{
+      width:100%;height:100%;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:0.6rem;color:var(--border);
+      font-family:var(--font-en);font-size:0.65rem;
+      letter-spacing:0.1em;text-transform:uppercase;
+    }
+
+    /* LIGHTBOX */
+    .lightbox{display:none;position:fixed;inset:0;z-index:200;background:rgba(7,11,17,0.97);align-items:center;justify-content:center}
+    .lightbox.open{display:flex}
+    .lightbox-img-wrap{position:relative}
+    .lightbox img{max-width:90vw;max-height:88vh;object-fit:contain;border:1px solid var(--border);display:block}
+    .lightbox-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;color:var(--muted);cursor:pointer;background:none;border:none;transition:color 0.2s;line-height:1}
+    .lightbox-close:hover{color:var(--white)}
+    .lightbox-prev,.lightbox-next{
+      position:absolute;top:50%;transform:translateY(-50%);
+      background:none;border:1px solid var(--border);
+      color:var(--muted);font-size:1.2rem;
+      width:44px;height:44px;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      transition:color 0.2s,border-color 0.2s;
+    }
+    .lightbox-prev{left:2rem}
+    .lightbox-next{right:2rem}
+    .lightbox-prev:hover,.lightbox-next:hover{color:var(--white);border-color:var(--white)}
+    .lightbox-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-family:var(--font-en);font-size:0.72rem;color:var(--muted);letter-spacing:0.1em}
+
+    footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .footer-copy{font-family:var(--font-en);font-size:0.72rem;color:var(--muted);letter-spacing:0.06em}
+    .footer-back-top{font-family:var(--font-en);font-size:0.72rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:color 0.2s}
+    .footer-back-top:hover{color:var(--accent2)}
+
+    @media(max-width:900px){nav{padding:0 1.5rem}.back-btn{margin-left:1.5rem}.project-info{grid-template-columns:1fr;gap:2rem;padding:2rem 1.5rem 2.5rem}.grid-wrap{padding:2rem 1.5rem 4rem}}
+    @media(max-width:600px){.nav-links{display:none}.image-grid{grid-template-columns:repeat(2,1fr)}footer{flex-direction:column;gap:1rem;text-align:center}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Baek Seokhyun</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li>
+      <a href="photography.html" class="active">Photography <span class="chevron"></span></a>
+      <ul class="dropdown">
+        <li><a href="photography.html">All</a></li>
+        <li><a href="photography.html?filter=food">Food</a></li>
+        <li><a href="photography.html?filter=product">Product</a></li>
+      </ul>
+    </li>
+    <li><a href="video.html">Video</a></li>
+    <li>
+      <a href="ai.html">AI Content <span class="chevron"></span></a>
+      <ul class="dropdown">
+        <li><a href="ai.html">All</a></li>
+        <li><a href="ai.html?filter=photography">Photography</a></li>
+        <li><a href="ai.html?filter=video">Video</a></li>
+      </ul>
+    </li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<a class="back-btn" href="photography.html">
+  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  Photography
+</a>
+
+<!-- PROJECT INFO -->
+<div class="project-info" id="projectInfo">
+  <div class="project-meta">
+    <span class="project-tag" id="projectTag">Food</span>
+    <p class="project-brand" id="projectBrand">브랜드명</p>
+    <h1 class="project-title" id="projectTitle">프로젝트명</h1>
+    <p class="project-date" id="projectDate">2025</p>
+  </div>
+  <div class="project-desc" id="projectDesc">
+    <p>프로젝트 설명을 입력해주세요.</p>
+  </div>
+</div>
+
+<!-- IMAGE GRID -->
+<div class="grid-wrap">
+  <div class="image-grid" id="imageGrid">
+    <!-- JS로 동적 렌더링 -->
+  </div>
+</div>
+
+<footer>
+  <p class="footer-copy">© 2026 Baek Seokhyun. All rights reserved.</p>
+  <a class="footer-back-top" href="#">Back to top ↑</a>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">×</button>
+  <button class="lightbox-prev" id="lightboxPrev">‹</button>
+  <button class="lightbox-next" id="lightboxNext">›</button>
+  <img id="lightboxImg" src="" alt=""/>
+  <p class="lightbox-counter" id="lightboxCounter"></p>
+</div>
+
+<script>
+// ──────────────────────────────────────────────────────────────
+// 프로젝트 데이터베이스
+// 새 프로젝트 추가 시 이 객체에만 추가하면 됩니다.
+// images 배열에 Cloudinary URL을 순서대로 넣어주세요.
+// ──────────────────────────────────────────────────────────────
+const PROJECTS = {
+  /*
+  예시:
+  "jungmiso-almond": {
+    brand:    "정미소",
+    title:    "아몬드 스프레드 캠페인",
+    date:     "2025",
+    category: "food",
+    desc:     ["프로젝트 설명 첫 번째 단락.", "두 번째 단락."],
+    images: [
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/jungmiso_01.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/jungmiso_02.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/jungmiso_03.jpg",
+    ]
+  },
+  "lelabo-neroli": {
+    brand:    "Le Labo",
+    title:    "Neroli 36 Product",
+    date:     "2024",
+    category: "product",
+    desc:     ["프로덕트 촬영 설명."],
+    images: [
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/lelabo_01.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/lelabo_02.jpg",
+    ]
+  },
+  */
+};
+
+// URL에서 id 파라미터 읽기
+const params  = new URLSearchParams(window.location.search);
+const id      = params.get('id');
+const project = PROJECTS[id];
+
+if (project) {
+  // 프로젝트 정보 렌더링
+  document.title = `${project.title} — BAEK SEOKHYUN`;
+  document.getElementById('projectTag').textContent   = project.category.charAt(0).toUpperCase() + project.category.slice(1);
+  document.getElementById('projectBrand').textContent = project.brand;
+  document.getElementById('projectTitle').textContent = project.title;
+  document.getElementById('projectDate').textContent  = project.date;
+  document.getElementById('projectDesc').innerHTML    = project.desc.map(p=>`<p>${p}</p>`).join('');
+
+  // 뒤로가기 버튼 필터 연동
+  const backBtn = document.querySelector('.back-btn');
+  backBtn.href = `photography.html?filter=${project.category}`;
+
+  // 이미지 그리드 렌더링
+  const grid = document.getElementById('imageGrid');
+  grid.innerHTML = project.images.map((src, i) => `
+    <div class="img-card" onclick="openLightbox(${i})">
+      <img src="${src}" alt="${project.title} ${i+1}" loading="lazy"/>
+      <div class="img-card-overlay">
+        <div class="zoom-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  `).join('');
+} else {
+  // 프로젝트를 찾을 수 없을 때
+  document.getElementById('projectTitle').textContent = '프로젝트를 찾을 수 없습니다.';
+  document.getElementById('projectDesc').innerHTML = '<p>올바른 링크인지 확인해주세요.</p>';
+}
+
+// ── Lightbox ──
+const images = project ? project.images : [];
+let currentIdx = 0;
+
+function openLightbox(idx) {
+  currentIdx = idx;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+}
+function updateLightbox() {
+  document.getElementById('lightboxImg').src = images[currentIdx];
+  document.getElementById('lightboxCounter').textContent = `${currentIdx + 1} / ${images.length}`;
+}
+document.getElementById('lightboxClose').addEventListener('click', () => document.getElementById('lightbox').classList.remove('open'));
+document.getElementById('lightboxPrev').addEventListener('click', () => { currentIdx = (currentIdx - 1 + images.length) % images.length; updateLightbox(); });
+document.getElementById('lightboxNext').addEventListener('click', () => { currentIdx = (currentIdx + 1) % images.length; updateLightbox(); });
+document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) document.getElementById('lightbox').classList.remove('open'); });
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowLeft')  { currentIdx = (currentIdx - 1 + images.length) % images.length; updateLightbox(); }
+  if (e.key === 'ArrowRight') { currentIdx = (currentIdx + 1) % images.length; updateLightbox(); }
+  if (e.key === 'Escape')     document.getElementById('lightbox').classList.remove('open');
+});
+</script>
+</body>
+</html>
