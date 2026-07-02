@@ -72,6 +72,52 @@ const PROJECTS = [
     ]
   },
 
+  {
+    id:        "binggrae-melatonin-nmn",
+    section:   "photography",
+    category:  "food",
+    brand:     "빙그레",
+    title:     "멜라토닌&NMN",
+    date:      "2025",
+    showOnHome: true,
+    images: [
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917257/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN_1_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_gtvlsb.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917259/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN_2_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_qrbcdf.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917260/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN_3_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_vxdh3g.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917245/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN4283_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_pmtnqu.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917239/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN4323_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_bi5hqi.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917237/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN4366_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_qrxrrp.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917244/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN4381_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_mqnr4m.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917240/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN4398_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_sn4kkg.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917238/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN4496_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_tui7sa.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917248/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN4519_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_pd1ewn.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917249/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN4533_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_pnd023.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917247/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN4547_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_omhlpj.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917251/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN4606_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_dylvs1.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782917255/250617_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%86%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A1%E1%84%90%E1%85%A9%E1%84%82%E1%85%B5%E1%86%AB_NMN4615_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1-10mb_uasuds.jpg",
+    ]
+  },
+
+  {
+    id:        "mongbest-water",
+    section:   "photography",
+    category:  "product",
+    brand:     "몽베스트",
+    title:     "생수",
+    date:      "2025",
+    showOnHome: true,
+    images: [
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916529/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34070-10mb_izsxil.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916538/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34072-10mb_k6kas6.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916530/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34074-10mb_yhq7jq.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916539/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34076-10mb_gh0kjb.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916531/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34078-10mb_vfy5an.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916535/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34082-10mb_petgsh.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916532/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34089-10mb_hcjy10.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916533/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34094-10mb_ikepaa.jpg",
+    ]
+  },
+
   // ────────────────────────────────────────────────────────────────
   // 📋 새 프로젝트 추가 시 아래 템플릿을 복사해서 사용하세요:
   // ────────────────────────────────────────────────────────────────
