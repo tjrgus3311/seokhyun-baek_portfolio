@@ -107,13 +107,14 @@ const PROJECTS = [
     date:      "2025",
     showOnHome: true,
     images: [
+      // 첫 번째 = 대표 썸네일 (4089)
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916532/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34089-10mb_hcjy10.jpg",
       "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916529/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34070-10mb_izsxil.jpg",
       "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916538/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34072-10mb_k6kas6.jpg",
       "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916530/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34074-10mb_yhq7jq.jpg",
       "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916539/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34076-10mb_gh0kjb.jpg",
       "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916531/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34078-10mb_vfy5an.jpg",
       "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916535/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34082-10mb_petgsh.jpg",
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916532/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34089-10mb_hcjy10.jpg",
       "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782916533/250612_%E1%84%85%E1%85%B5%E1%84%91%E1%85%B3_%E1%84%86%E1%85%A9%E1%86%BC%E1%84%87%E1%85%A6%E1%84%89%E1%85%B3%E1%84%90%E1%85%B34094-10mb_ikepaa.jpg",
     ]
   },

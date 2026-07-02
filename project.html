@@ -110,7 +110,7 @@
     .lightbox{display:none;position:fixed;inset:0;z-index:200;background:rgba(7,11,17,0.97);align-items:center;justify-content:center;transition:background 0.3s}
     .lightbox.open{display:flex}
     .lightbox-img-wrap{position:relative}
-    .lightbox img{max-width:90vw;max-height:88vh;object-fit:contain;border:1px solid var(--border);display:block;transition:transform 0.3s ease,opacity 0.3s ease;touch-action:none;cursor:zoom-in}
+    .lightbox img{position:absolute;inset:0;margin:auto;max-width:90vw;max-height:88vh;object-fit:contain;border:1px solid var(--border);display:block;transition:transform 0.3s ease,opacity 0.3s ease;touch-action:none;cursor:zoom-in}
     .lightbox-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;color:var(--muted);cursor:pointer;background:none;border:none;transition:color 0.2s;line-height:1;z-index:5}
     .lightbox-close:hover{color:var(--white)}
     .lightbox-prev,.lightbox-next{
@@ -367,45 +367,60 @@ function preloadNeighbors() {
   });
 }
 
-// 전환 모션: 페이드 + 살짝 슬라이드. 다음 이미지가 다 불러와진 뒤에 보여준다.
+// 전환 모션: 현재 이미지를 그대로 복제해 뒤로 밀어내고, 실제 이미지는 다음 사진으로 바꿔
+// 반대편에서 밀고 들어오게 한다. 투명도 변화가 없어서 깜빡임 없이 캐러셀처럼 자연스럽다.
 let lbAnimating = false;
 function navigate(dir) {
   if (images.length < 2 || lbAnimating) return;
   resetZoom(false);
   lbAnimating = true;
+  const lb  = document.getElementById('lightbox');
   const img = lbImg();
   const nextIdx = (currentIdx + dir + images.length) % images.length;
   const nextSrc = images[nextIdx];
-  const outX = dir > 0 ? '-16px' : '16px';
-  const inX  = dir > 0 ? '16px'  : '-16px';
+  const SLIDE = 100; // vw 단위. 이미지 자체 폭과 무관하게 화면 밖으로 확실히 빠져나가도록.
 
-  const afterFadeOut = () => {
-    img.removeEventListener('transitionend', afterFadeOut);
-    const reveal = () => {
-      currentIdx = nextIdx;
-      img.src = nextSrc;
-      document.getElementById('lightboxCounter').textContent = `${currentIdx + 1} / ${images.length}`;
-      preloadNeighbors();
-      img.style.transition = 'none';
-      img.style.transform  = `translateX(${inX}) scale(0.98)`;
-      img.style.opacity    = '0.2';
-      void img.offsetWidth; // 강제 리플로우 후 애니메이션 시작
-      requestAnimationFrame(() => {
-        img.style.transition = 'transform 0.22s ease-out, opacity 0.22s ease-out';
-        img.style.transform  = 'translateX(0) scale(1)';
-        img.style.opacity    = '1';
-        img.addEventListener('transitionend', () => { lbAnimating = false; }, { once: true });
-      });
-    };
-    const probe = new Image();
-    probe.onload = probe.onerror = reveal;
-    probe.src = nextSrc;
-    if (probe.complete) reveal();
+  const run = () => {
+    // 1) 지금 보이는 이미지를 그대로 복제해 뒤로 밀려날 레이어로 사용
+    const clone = img.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.style.pointerEvents = 'none';
+    clone.style.zIndex = '1';
+    clone.style.transition = 'none';
+    clone.style.transform = 'translateX(0)';
+    lb.insertBefore(clone, img);
+
+    // 2) 실제 이미지는 다음 사진으로 즉시 교체하고, 들어올 자리(반대편 화면 밖)로 순간 이동
+    currentIdx = nextIdx;
+    img.src = nextSrc;
+    document.getElementById('lightboxCounter').textContent = `${currentIdx + 1} / ${images.length}`;
+    preloadNeighbors();
+    img.style.zIndex = '2';
+    img.style.transition = 'none';
+    img.style.transform = `translateX(${dir > 0 ? SLIDE : -SLIDE}vw)`;
+    void img.offsetWidth; // 강제 리플로우
+
+    // 3) 두 레이어를 동시에 반대 방향으로 슬라이드 (밀어내기)
+    requestAnimationFrame(() => {
+      const easing = 'transform 0.32s cubic-bezier(.4,0,.2,1)';
+      clone.style.transition = easing;
+      clone.style.transform  = `translateX(${dir > 0 ? -SLIDE : SLIDE}vw)`;
+      img.style.transition = easing;
+      img.style.transform  = 'translateX(0)';
+      img.addEventListener('transitionend', () => {
+        clone.remove();
+        img.style.zIndex = '';
+        lbAnimating = false;
+      }, { once: true });
+    });
   };
-  img.addEventListener('transitionend', afterFadeOut, { once: true });
-  img.style.transition = 'transform 0.15s ease-out, opacity 0.15s ease-out';
-  img.style.transform  = `translateX(${outX}) scale(0.98)`;
-  img.style.opacity    = '0.2';
+
+  let started = false;
+  const runOnce = () => { if (started) return; started = true; run(); };
+  const probe = new Image();
+  probe.onload = probe.onerror = runOnce;
+  probe.src = nextSrc;
+  if (probe.complete) runOnce();
 }
 document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
 document.getElementById('lightboxPrev').addEventListener('click', () => navigate(-1));
