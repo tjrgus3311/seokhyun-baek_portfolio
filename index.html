@@ -324,24 +324,31 @@
         menu.classList.add('open');
         document.body.style.overflow = 'hidden';
       }
+      function closeMenu(){
+        toggle.classList.remove('open');
+        menu.classList.remove('open');
+        document.body.style.overflow = '';
+      }
       toggle.addEventListener('click', ()=>{
         toggle.classList.toggle('open');
         menu.classList.toggle('open');
         document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
       });
 
-      // 홈 화면(모바일 전용): 우→좌 스와이프 시 햄버거 메뉴와 동일하게 열림
+      // 홈 화면(모바일 전용): 우→좌 스와이프로 메뉴 열기, 열린 상태에서 좌→우 스와이프로 닫기
       let touchStartX = 0, touchStartY = 0;
       document.addEventListener('touchstart', e=>{
-        if(window.innerWidth > 600 || menu.classList.contains('open')) return;
+        if(window.innerWidth > 600) return;
         touchStartX = e.changedTouches[0].screenX;
         touchStartY = e.changedTouches[0].screenY;
       }, { passive:true });
       document.addEventListener('touchend', e=>{
-        if(window.innerWidth > 600 || menu.classList.contains('open')) return;
+        if(window.innerWidth > 600) return;
         const dx = e.changedTouches[0].screenX - touchStartX;
         const dy = e.changedTouches[0].screenY - touchStartY;
-        if(dx < -60 && Math.abs(dx) > Math.abs(dy) * 1.5) openMenu();
+        if(Math.abs(dx) <= Math.abs(dy) * 1.5) return; // 세로 스와이프는 무시
+        if(!menu.classList.contains('open') && dx < -60) openMenu();
+        else if(menu.classList.contains('open') && dx > 60) closeMenu();
       }, { passive:true });
     }
   })();
