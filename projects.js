@@ -114,3 +114,13 @@ function getProject(id)      { return PROJECTS.find(p => p.id === id); }
 function getBySection(sec)   { return PROJECTS.filter(p => p.section === sec); }
 function getByCategory(sec, cat) { return PROJECTS.filter(p => p.section === sec && p.category === cat); }
 function getHomeWorks()      { return PROJECTS.filter(p => p.showOnHome && p.category !== 'video'); }
+
+// 검색: 브랜드명 / 프로젝트명 / 카테고리로 프로젝트 찾기
+function searchProjects(keyword) {
+  const q = keyword.trim().toLowerCase();
+  if (!q) return [];
+  return PROJECTS.filter(p => {
+    const haystack = `${p.brand} ${p.title} ${p.section} ${p.category}`.toLowerCase();
+    return haystack.includes(q);
+  });
+}

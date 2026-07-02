@@ -48,6 +48,29 @@
     .footer-copy{font-family:var(--font-en);font-size:0.72rem;color:var(--muted);letter-spacing:0.06em}
     @media(max-width:900px){nav{padding:0 1.5rem}.contact-page{padding:calc(var(--nav-h)+3rem) 1.5rem 4rem}.contact-grid{grid-template-columns:1fr;gap:3rem}}
 
+    /* ── 검색 ── */
+    .nav-search-btn{background:none;border:none;cursor:pointer;padding:0.5rem;color:var(--muted);display:flex;align-items:center;transition:color 0.2s;margin-left:0.5rem}
+    .nav-search-btn:hover{color:var(--white)}
+    .search-overlay{display:none;position:fixed;inset:0;z-index:150;background:rgba(13,17,23,0.97);backdrop-filter:blur(16px);padding:0}
+    .search-overlay.open{display:block}
+    .search-head{max-width:1200px;margin:0 auto;padding:calc(var(--nav-h) + 2.5rem) 3rem 1.5rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border)}
+    .search-input{flex:1;background:none;border:none;outline:none;color:var(--white);font-family:var(--font-en);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:300;letter-spacing:-0.01em}
+    .search-input::placeholder{color:var(--border)}
+    .search-close{background:none;border:none;color:var(--muted);font-size:1.8rem;cursor:pointer;line-height:1;transition:color 0.2s}
+    .search-close:hover{color:var(--white)}
+    .search-results{max-width:1200px;margin:0 auto;padding:2rem 3rem 4rem;max-height:calc(100vh - var(--nav-h) - 8rem);overflow-y:auto}
+    .search-hint{color:var(--muted);font-family:var(--font-en);font-size:0.8rem;letter-spacing:0.06em}
+    .search-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:1rem}
+    .search-card{position:relative;overflow:hidden;aspect-ratio:3/4;background:var(--surface);cursor:pointer}
+    .search-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s}
+    .search-card:hover img{transform:scale(1.04)}
+    .search-card-info{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 55%);opacity:0;transition:opacity 0.3s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem}
+    .search-card:hover .search-card-info{opacity:1}
+    .search-card-brand{font-family:var(--font-en);font-size:0.65rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.3rem}
+    .search-card-title{font-family:var(--font-en);font-size:0.9rem;font-weight:600;color:var(--white)}
+    @media(max-width:900px){.search-head{padding-left:1.5rem;padding-right:1.5rem}.search-results{padding-left:1.5rem;padding-right:1.5rem}}
+    @media(max-width:600px){.search-grid{grid-template-columns:repeat(2,1fr)}}
+
     /* ── 모바일 햄버거 메뉴 ── */
     .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:0.5rem;flex-direction:column;gap:5px;z-index:120}
     .nav-toggle span{display:block;width:24px;height:2px;background:var(--white);transition:transform 0.3s,opacity 0.3s}
@@ -89,6 +112,9 @@
     </li>
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
+  <button class="nav-search-btn" id="searchOpen" aria-label="search">
+    <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </button>
   <button class="nav-toggle" id="navToggle" aria-label="menu">
     <span></span><span></span><span></span>
   </button>
@@ -141,6 +167,17 @@
         </a>
       </div>
     </div>
+<!-- 검색 오버레이 -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-head">
+    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:var(--accent)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" class="search-input" id="searchInput" placeholder="브랜드, 프로젝트명으로 검색..." autocomplete="off"/>
+    <button class="search-close" id="searchClose" aria-label="close">&times;</button>
+  </div>
+  <div class="search-results" id="searchResults">
+    <p class="search-hint">브랜드명이나 프로젝트명을 입력해보세요.</p>
+  </div>
+</div>
     <form class="contact-form" id="contactForm" action="https://formspree.io/f/xlgypeny" method="POST">
       <input type="text" name="name" placeholder="이름" required/>
       <input type="email" name="email" placeholder="이메일" required/>
@@ -204,6 +241,54 @@
         document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
       });
     }
+  })();
+</script>
+
+<script>
+  (function(){
+    const overlay = document.getElementById('searchOverlay');
+    const input   = document.getElementById('searchInput');
+    const results = document.getElementById('searchResults');
+    const openBtn = document.getElementById('searchOpen');
+    const closeBtn= document.getElementById('searchClose');
+    if(!overlay) return;
+
+    function openSearch(){
+      overlay.classList.add('open');
+      document.body.style.overflow='hidden';
+      setTimeout(()=>input.focus(), 100);
+    }
+    function closeSearch(){
+      overlay.classList.remove('open');
+      document.body.style.overflow='';
+      input.value='';
+      results.innerHTML='<p class="search-hint">브랜드명이나 프로젝트명을 입력해보세요.</p>';
+    }
+    if(openBtn) openBtn.addEventListener('click', openSearch);
+    closeBtn.addEventListener('click', closeSearch);
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape' && overlay.classList.contains('open')) closeSearch(); });
+
+    input.addEventListener('input', ()=>{
+      const q = input.value.trim();
+      if(!q){ results.innerHTML='<p class="search-hint">브랜드명이나 프로젝트명을 입력해보세요.</p>'; return; }
+      const found = searchProjects(q);
+      if(found.length===0){
+        results.innerHTML=`<p class="search-hint">"${q}"에 대한 결과가 없습니다.</p>`;
+        return;
+      }
+      results.innerHTML = `<p class="search-hint">${found.length}개의 프로젝트</p><div class="search-grid">` +
+        found.map(p=>{
+          const link = p.section==='ai' ? `ai-project.html?id=${p.id}` : `project.html?id=${p.id}`;
+          const img = p.images && p.images.length ? thumb(p.images[0]) : '';
+          return `<div class="search-card" onclick="location.href='${link}'">
+            ${img?`<img src="${img}" alt="${p.title}" loading="lazy"/>`:''}
+            <div class="search-card-info">
+              <p class="search-card-brand">${p.brand}</p>
+              <p class="search-card-title">${p.title}</p>
+            </div>
+          </div>`;
+        }).join('') + `</div>`;
+    });
   })();
 </script>
 </body>
