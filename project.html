@@ -447,7 +447,11 @@ document.addEventListener('keydown', e => {
   lb.addEventListener('wheel', e => {
     if (!lb.classList.contains('open')) return;
     e.preventDefault();
-    setZoomScale(scale * (1 - e.deltaY * 0.0015), false);
+    // Chrome/Edge/Whale 등은 트랙패드 핀치를 wheel + ctrlKey:true 로 위장해서 보내는데,
+    // 이때 deltaY 값이 일반 스크롤보다 훨씬 작아서 같은 배율로는 거의 확대가 안 느껴짐
+    const delta = Math.max(-40, Math.min(40, e.deltaY)); // 기기별 편차가 큰 delta 값 클램핑
+    const sensitivity = e.ctrlKey ? 0.02 : 0.0015;
+    setZoomScale(scale * (1 - delta * sensitivity), false);
   }, { passive: false });
 
   // Safari 트랙패드 핀치: wheel이 아닌 별도의 gesture 이벤트로 전달되므로 따로 처리
