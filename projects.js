@@ -28,7 +28,7 @@ const PROJECTS = [
     section:   "ai",             // AI Content 탭
     category:  "photography",    // AI > Photography
     brand:     "Le Labo",
-    title:     "Work Spec",
+    title:     "Spec Work",
     date:      "2026",
     showOnHome: true,
     images: [
