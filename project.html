@@ -450,6 +450,18 @@ document.addEventListener('keydown', e => {
     setZoomScale(scale * (1 - e.deltaY * 0.0015), false);
   }, { passive: false });
 
+  // Safari 트랙패드 핀치: wheel이 아닌 별도의 gesture 이벤트로 전달되므로 따로 처리
+  let gestureStartScale = 1;
+  lb.addEventListener('gesturestart', e => {
+    e.preventDefault();
+    gestureStartScale = scale;
+  });
+  lb.addEventListener('gesturechange', e => {
+    e.preventDefault();
+    setZoomScale(gestureStartScale * e.scale, false);
+  });
+  lb.addEventListener('gestureend', e => e.preventDefault());
+
   let mouseDragging = false, mdStartX = 0, mdStartY = 0, mdPanX = 0, mdPanY = 0;
   img.addEventListener('mousedown', e => {
     if (scale <= 1) return;
