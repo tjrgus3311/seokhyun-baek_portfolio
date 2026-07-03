@@ -274,7 +274,8 @@
 <script src="projects.js"></script>
 <script>
   // 홈에는 사진 콘텐츠(Photography + AI Photography)만 표시 (영상 제외)
-  const homeWorks = getHomeWorks();
+  // pinned:true 항목이 최신순 정렬과 무관하게 맨 앞(상단 고정 영역)에 오도록 정렬
+  const homeWorks = getHomeWorksOrdered();
 
   const LIMIT = 10; // 홈에 최대로 보여줄 개수
   const grid = document.getElementById('workGrid');
