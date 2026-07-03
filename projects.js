@@ -119,6 +119,24 @@ const PROJECTS = [
     ]
   },
 
+  {
+    id:        "binggrae-jalki",
+    section:   "photography",
+    category:  "food",
+    brand:     "빙그레",
+    title:     "잘키",
+    date:      "2025",
+    showOnHome: true,
+    images: [
+      // 첫 번째 = 대표 썸네일 (남매 그룹샷)
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1783062481/portfolio/Photography/Product/%2A25_%E1%84%8B%E1%85%AC%E1%84%8C%E1%85%AE_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%8C%E1%85%A1%E1%86%AF%E1%84%8F%E1%85%B5/250820_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%8C%E1%85%A1%E1%86%AF%E1%84%8F%E1%85%B5%203.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1783062473/portfolio/Photography/Product/%2A25_%E1%84%8B%E1%85%AC%E1%84%8C%E1%85%AE_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%8C%E1%85%A1%E1%86%AF%E1%84%8F%E1%85%B5/250820_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%8C%E1%85%A1%E1%86%AF%E1%84%8F%E1%85%B5%204.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1783062469/portfolio/Photography/Product/%2A25_%E1%84%8B%E1%85%AC%E1%84%8C%E1%85%AE_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%8C%E1%85%A1%E1%86%AF%E1%84%8F%E1%85%B5/250820_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%8C%E1%85%A1%E1%86%AF%E1%84%8F%E1%85%B5%205.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1783062465/portfolio/Photography/Product/%2A25_%E1%84%8B%E1%85%AC%E1%84%8C%E1%85%AE_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%8C%E1%85%A1%E1%86%AF%E1%84%8F%E1%85%B5/250820_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%8C%E1%85%A1%E1%86%AF%E1%84%8F%E1%85%B5%201.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1783062477/portfolio/Photography/Product/%2A25_%E1%84%8B%E1%85%AC%E1%84%8C%E1%85%AE_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%8C%E1%85%A1%E1%86%AF%E1%84%8F%E1%85%B5/250820_%E1%84%87%E1%85%B5%E1%86%BC%E1%84%80%E1%85%B3%E1%84%85%E1%85%A6_%E1%84%8C%E1%85%A1%E1%86%AF%E1%84%8F%E1%85%B5%202.jpg",
+    ]
+  },
+
   // ────────────────────────────────────────────────────────────────
   // 📋 새 프로젝트 추가 시 아래 템플릿을 복사해서 사용하세요:
   // ────────────────────────────────────────────────────────────────
