@@ -175,7 +175,7 @@ const PROJECTS = [
     images: [
       "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782874332/%E1%84%85%E1%85%B3%E1%84%85%E1%85%A1%E1%84%87%E1%85%A9_%E1%84%83%E1%85%A1%E1%86%AB%E1%84%8E%E1%85%A6_01_opqajw.jpg",
       "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782874332/%E1%84%85%E1%85%B3%E1%84%85%E1%85%A1%E1%84%87%E1%85%A9_%E1%84%8B%E1%85%A5%E1%84%82%E1%85%A1%E1%84%83%E1%85%A513_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF02_wmgz09.jpg",
-      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782874332/%E1%84%85%E1%85%B3%E1%84%85%E1%85%A1%E1%84%87%E1%85%A9_%E1%84%82%E1%85%A6%E1%84%85%E1%85%A9%E1%84%86%E1%85%AE%E1%86%AF%E1%85%B536_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF01_rmabvf.jpg",
+      "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1783220940/%EB%A5%B4%EB%9D%BC%EB%B3%B4_%EB%84%A4%EB%A1%A4%EB%A6%AC36_%EA%B2%B0%EA%B3%BC%EB%AC%BC01_cygjay.jpg",
       "https://res.cloudinary.com/cfljj4qd/image/upload/w_1200/v1782874332/%E1%84%85%E1%85%B3%E1%84%85%E1%85%A1%E1%84%87%E1%85%A9_%E1%84%87%E1%85%A6%E1%84%85%E1%85%B3%E1%84%80%E1%85%A1%E1%84%86%E1%85%A9%E1%86%BA22_%E1%84%80%E1%85%A7%E1%86%AF%E1%84%80%E1%85%AA%E1%84%86%E1%85%AE%E1%86%AF02_wpwuip.jpg",
     ]
   },
