@@ -121,7 +121,7 @@ const PROJECTS = [
     section:   "photography",
     category:  "product",
     brand:     "바이오케미스타",
-    title:     "Whippu 3종 2차",
+    title:     "Whippu 3종",
     date:      "2026",
     showOnHome: true,
     images: [
