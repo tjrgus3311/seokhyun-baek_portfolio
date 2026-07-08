@@ -14,6 +14,20 @@ const VIDEOS = [
     title: "맘쿠키",
     date:  "2024",
   },
+  {
+    id:    "monkshu-lowsugar-mayo",
+    ytId:  "nOmDZcr-OAw",
+    brand: "몽크슈",
+    title: "저당 마요네즈",
+    date:  "2026",
+  },
+  {
+    id:    "specwork-sizzle",
+    ytId:  "weLJvoi_Kkw",
+    brand: "Spec Work",
+    title: "SIZZLE",
+    date:  "2026",
+  },
 ];
 
 function getVideo(id) {
