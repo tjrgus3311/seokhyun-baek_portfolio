@@ -171,7 +171,7 @@
 <script>
   (function(){
     const grid = document.getElementById('videoGrid');
-    grid.innerHTML = VIDEOS.map(v => `
+    grid.innerHTML = getSortedVideos().map(v => `
       <div class="video-card" onclick="location.href='video-project.html?id=${v.id}'">
         <div class="video-thumb">
           <img src="${ytThumb(v.ytId)}" alt="${v.title}" loading="lazy"/>
