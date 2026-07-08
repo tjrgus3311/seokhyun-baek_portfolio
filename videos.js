@@ -7,6 +7,13 @@ const VIDEOS = [
     title: "참그레인",
     date:  "2024",
   },
+  {
+    id:    "crown-momcookie",
+    ytId:  "s5bIYGXDvHg",
+    brand: "크라운제과",
+    title: "맘쿠키",
+    date:  "2024",
+  },
 ];
 
 function getVideo(id) {
