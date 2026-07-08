@@ -7,9 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#0d1117;--bg2:#131923;--surface:#1a2233;--border:#1e2d42;--text:#e0e6f0;--muted:#5a7a99;--accent:#4a90d9;--accent2:#6ab0f5;--white:#ffffff;--nav-h:60px;--font-en:'Inter',sans-serif;--font-kr:'Noto Sans KR',sans-serif}
+    :root{--bg:#0d1117;--surface:#1a2233;--border:#1e2d42;--text:#e0e6f0;--muted:#5a7a99;--accent:#4a90d9;--accent2:#6ab0f5;--white:#ffffff;--nav-h:60px;--font-en:'Inter',sans-serif;--font-kr:'Noto Sans KR',sans-serif}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:var(--font-kr);font-weight:300;-webkit-font-smoothing:antialiased}
+
+    /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:var(--nav-h);background:rgba(13,17,23,0.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
     .nav-logo{font-family:var(--font-en);font-size:0.95rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);text-decoration:none}
     .nav-links{display:flex;list-style:none}
@@ -24,28 +26,30 @@
     .dropdown li a{display:block;padding:0.7rem 1.4rem;font-family:var(--font-en);font-size:0.75rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.15s,background 0.15s}
     .dropdown li a:hover{color:var(--white);background:rgba(74,144,217,0.08)}
 
-    .page-header{padding:calc(var(--nav-h) + 5rem) 3rem 3rem;max-width:1200px;margin:0 auto}
-    .page-eyebrow{font-family:var(--font-en);font-size:0.7rem;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
-    .page-title{font-family:var(--font-en);font-size:clamp(2rem,4vw,3.5rem);font-weight:800;color:var(--white);letter-spacing:-0.02em}
+    /* BACK BUTTON */
+    .back-btn{display:inline-flex;align-items:center;gap:0.5rem;margin:calc(var(--nav-h) + 3rem) 0 0 3rem;font-family:var(--font-en);font-size:0.75rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+    .back-btn:hover{color:var(--accent2)}
+    .back-btn svg{transition:transform 0.2s}
+    .back-btn:hover svg{transform:translateX(-3px)}
 
-    .grid-wrap{max-width:1200px;margin:0 auto;padding:2rem 3rem 6rem}
-    .video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
-    .video-card{position:relative;overflow:hidden;background:var(--surface);cursor:pointer;transition:border-color 0.2s}
-    .video-thumb{position:relative;aspect-ratio:16/9;background:var(--bg);overflow:hidden}
-    .video-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s}
-    .video-card:hover .video-thumb img{transform:scale(1.04)}
-    .video-play-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;transition:background 0.2s}
-    .video-card:hover .video-play-overlay{background:rgba(0,0,0,0.5)}
-    .play-btn{width:52px;height:52px;border:1px solid rgba(255,255,255,0.6);border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(13,17,23,0.4)}
-    .video-info{padding:1.1rem 1.25rem;border-top:1px solid var(--border)}
-    .video-title{font-size:0.92rem;font-weight:500;color:var(--white);margin-bottom:0.3rem}
-    .video-meta{font-family:var(--font-en);font-size:0.7rem;letter-spacing:0.08em;color:var(--muted)}
+    /* PROJECT INFO */
+    .project-info{max-width:1200px;margin:0 auto;padding:2.5rem 3rem 3.5rem;border-bottom:1px solid var(--border)}
+    .project-tag{display:inline-block;margin-bottom:1.2rem;padding:0.25rem 0.7rem;font-family:var(--font-en);font-size:0.65rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;background:rgba(74,144,217,0.15);border:1px solid rgba(74,144,217,0.35);color:var(--accent2)}
+    .project-brand{font-family:var(--font-en);font-size:0.72rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
+    .project-title{font-family:var(--font-en);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;color:var(--white);letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem}
+    .project-date{font-family:var(--font-en);font-size:0.75rem;color:var(--muted);letter-spacing:0.1em}
+
+    /* VIDEO EMBED */
+    .video-wrap{max-width:1000px;margin:0 auto;padding:3rem 3rem 6rem}
+    .video-embed{position:relative;aspect-ratio:16/9;background:#000;border:1px solid var(--border)}
+    .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:block}
 
     footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
     .footer-copy{font-family:var(--font-en);font-size:0.72rem;color:var(--muted);letter-spacing:0.06em}
-    .footer-back{font-family:var(--font-en);font-size:0.72rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:color 0.2s}
-    .footer-back:hover{color:var(--accent2)}
-    @media(max-width:900px){nav{padding:0 1.5rem}.page-header{padding:calc(var(--nav-h) + 3rem) 1.5rem 2rem}.grid-wrap{padding:2rem 1.5rem 4rem}}
+    .footer-back-top{font-family:var(--font-en);font-size:0.72rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:color 0.2s}
+    .footer-back-top:hover{color:var(--accent2)}
+
+    @media(max-width:900px){nav{padding:0 1.5rem}.back-btn{margin-left:1.5rem}.project-info{padding:2rem 1.5rem 2.5rem}.video-wrap{padding:2rem 1.5rem 4rem}}
 
     /* ── 검색 ── */
     .nav-search-btn{background:none;border:none;cursor:pointer;padding:0.5rem;color:var(--muted);display:flex;align-items:center;transition:color 0.2s;margin-left:0.5rem}
@@ -86,10 +90,11 @@
     .mobile-submenu li a{display:block;padding:0.5rem;font-family:var(--font-en);font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);text-decoration:none}
     .mobile-submenu li a:active{color:var(--accent2)}
     @media(max-width:600px){.nav-toggle{display:flex}}
-    @media(max-width:600px){.nav-links{display:none}.video-grid{grid-template-columns:1fr}footer{flex-direction:column;gap:1rem;text-align:center}}
+    @media(max-width:600px){.nav-links{display:none}footer{flex-direction:column;gap:1rem;text-align:center}}
   </style>
 </head>
 <body>
+
 <nav>
   <a class="nav-logo" href="index.html">Baek Seokhyun</a>
   <ul class="nav-links">
@@ -141,9 +146,16 @@
   </ul>
 </div>
 
-<div class="page-header">
-  <p class="page-eyebrow">Videography</p>
-  <h1 class="page-title">Video Works</h1>
+<a class="back-btn" href="video.html">
+  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  Video
+</a>
+
+<div class="project-info" id="projectInfo">
+  <span class="project-tag">Video</span>
+  <p class="project-brand" id="projectBrand">브랜드명</p>
+  <h1 class="project-title" id="projectTitle">프로젝트명</h1>
+  <p class="project-date" id="projectDate">2025</p>
 </div>
 
 <!-- 검색 오버레이 -->
@@ -158,31 +170,31 @@
   </div>
 </div>
 
-<div class="grid-wrap">
-  <div class="video-grid" id="videoGrid"><!-- JS로 동적 렌더링 --></div>
+<div class="video-wrap">
+  <div class="video-embed" id="videoEmbed"><!-- JS로 동적 렌더링 --></div>
 </div>
 
 <footer>
   <p class="footer-copy">© Baek Seokhyun. All rights reserved.</p>
-  <a class="footer-back" href="#">Back to top ↑</a>
+  <a class="footer-back-top" href="#">Back to top ↑</a>
 </footer>
 
 <script src="videos.js"></script>
 <script>
-  (function(){
-    const grid = document.getElementById('videoGrid');
-    grid.innerHTML = VIDEOS.map(v => `
-      <div class="video-card" onclick="location.href='video-project.html?id=${v.id}'">
-        <div class="video-thumb">
-          <img src="${ytThumb(v.ytId)}" alt="${v.title}" loading="lazy"/>
-          <div class="video-play-overlay">
-            <div class="play-btn"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3.5l7 4.5-7 4.5V3.5z" fill="#ffffff"/></svg></div>
-          </div>
-        </div>
-        <div class="video-info"><p class="video-title">${v.title}</p><p class="video-meta">${v.brand} · ${v.date}</p></div>
-      </div>
-    `).join('');
-  })();
+  const params = new URLSearchParams(window.location.search);
+  const id     = params.get('id');
+  const video  = getVideo(id);
+
+  if (video) {
+    document.title = `${video.title} — BAEK SEOKHYUN`;
+    document.getElementById('projectBrand').textContent = video.brand;
+    document.getElementById('projectTitle').textContent = video.title;
+    document.getElementById('projectDate').textContent  = video.date;
+    document.getElementById('videoEmbed').innerHTML =
+      `<iframe src="https://www.youtube.com/embed/${video.ytId}?autoplay=1" title="${video.title}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  } else {
+    document.getElementById('projectTitle').textContent = '영상을 찾을 수 없습니다.';
+  }
 </script>
 
 <script>
